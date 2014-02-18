@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<game_sales>
+	<sales year="2007">
+		<platform type="console">
+			<percentage genre="Strategy">4.7</percentage>
+			<percentage genre="Adventure">4.3</percentage>
+			<percentage genre="Fighting">4.5</percentage>
+			<percentage genre="Family">17.6</percentage>
+			<percentage genre="Role-Playing">7.6</percentage>
+			<percentage genre="Shooter">12.1</percentage>
+			<percentage genre="Other">2.3</percentage>
+			<percentage genre="Arcade">1.0</percentage>
+			<percentage genre="Flight">0.5</percentage>
+			<percentage genre="Action">0.7</percentage>
+			<percentage genre="Children">22.3</percentage>
+			<percentage genre="Sports">14.1</percentage>
+			<percentage genre="Racing">8.3</percentage>
+			<percentage genre="Casual">No data</percentage>
+		</platform>
+		<platform type="computer">
+			<percentage genre="Strategy">33.9</percentage>
+			<percentage genre="Adventure">5.0</percentage>
+			<percentage genre="Fighting">No data</percentage>
+			<percentage genre="Family">14.3</percentage>
+			<percentage genre="Role-Playing">18.8</percentage>
+			<percentage genre="Shooter">11.6</percentage>
+			<percentage genre="Other">3.0</percentage>
+			<percentage genre="Arcade">0.9</percentage>
+			<percentage genre="Flight">2.2</percentage>
+			<percentage genre="Action">2.6</percentage>
+			<percentage genre="Children">3.5</percentage>
+			<percentage genre="Sports">2.5</percentage>
+			<percentage genre="Racing">1.5</percentage>
+			<percentage genre="Casual">No data</percentage>
+		</platform>
+	</sales>
+	<sales year="2008">
+		<platform type="console">
+			<percentage genre="Strategy">6.2</percentage>
+			<percentage genre="Adventure">5.3</percentage>
+			<percentage genre="Fighting">5.1</percentage>
+			<percentage genre="Family">19.3</percentage>
+			<percentage genre="Role-Playing">5.4</percentage>
+			<percentage genre="Shooter">10.9</percentage>
+			<percentage genre="Other">2.2</percentage>
+			<percentage genre="Arcade">0.5</percentage>
+			<percentage genre="Flight">0.5</percentage>
+			<percentage genre="Action">20.0</percentage>
+			<percentage genre="Children">0.9</percentage>
+			<percentage genre="Sports">15.3</percentage>
+			<percentage genre="Racing">8.4</percentage>
+			<percentage genre="Casual">No data</percentage>
+		</platform>
+		<platform type="computer">
+			<percentage genre="Strategy">34.6</percentage>
+			<percentage genre="Adventure">6.8</percentage>
+			<percentage genre="Fighting">0.1</percentage>
+			<percentage genre="Family">17.7</percentage>
+			<percentage genre="Role-Playing">19.6</percentage>
+			<percentage genre="Shooter">9.7</percentage>
+			<percentage genre="Other">1.4</percentage>
+			<percentage genre="Arcade">0.5</percentage>
+			<percentage genre="Flight">1.8</percentage>
+			<percentage genre="Action">2.7</percentage>
+			<percentage genre="Children">2.5</percentage>
+			<percentage genre="Sports">1.8</percentage>
+			<percentage genre="Racing">1.4</percentage>
+			<percentage genre="Casual">No data</percentage>
+		</platform>
+	</sales>
+	<sales year="2009">
+		<platform type="console">
+			<percentage genre="Strategy">6.4</percentage>
+			<percentage genre="Adventure">6.6</percentage>
+			<percentage genre="Fighting">4.1</percentage>
+			<percentage genre="Family">15.3</percentage>
+			<percentage genre="Role-Playing">5.8</percentage>
+			<percentage genre="Shooter">12.2</percentage>
+			<percentage genre="Other">2.0</percentage>
+			<percentage genre="Arcade">0.3</percentage>
+			<percentage genre="Flight">0.4</percentage>
+			<percentage genre="Action">19.5</percentage>
+			<percentage genre="Children">0.9</percentage>
+			<percentage genre="Sports">19.6</percentage>
+			<percentage genre="Racing">6.7</percentage>
+			<percentage genre="Casual">No data</percentage>
+		</platform>
+		<platform type="computer">
+			<percentage genre="Strategy">35.5</percentage>
+			<percentage genre="Adventure">10.2</percentage>
+			<percentage genre="Fighting">0.1</percentage>
+			<percentage genre="Family">18.7</percentage>
+			<percentage genre="Role-Playing">13.9</percentage>
+			<percentage genre="Shooter">10.1</percentage>
+			<percentage genre="Other">2.2</percentage>
+			<percentage genre="Arcade">0.3</percentage>
+			<percentage genre="Flight">1.8</percentage>
+			<percentage genre="Action">3.2</percentage>
+			<percentage genre="Children">1.7</percentage>
+			<percentage genre="Sports">1.6</percentage>
+			<percentage genre="Racing">0.8</percentage>
+			<percentage genre="Casual">No data</percentage>
+		</platform>
+	</sales>
+	<sales year="2010">
+		<platform type="console">
+			<percentage genre="Strategy">3.8</percentage>
+			<percentage genre="Adventure">7.5</percentage>
+			<percentage genre="Fighting">3.0</percentage>
+			<percentage genre="Family">9.1</percentage>
+			<percentage genre="Role-Playing">7.7</percentage>
+			<percentage genre="Shooter">15.9</percentage>
+			<percentage genre="Other">2.7</percentage>
+			<percentage genre="Arcade">0.2</percentage>
+			<percentage genre="Flight">0.4</percentage>
+			<percentage genre="Action">21.7</percentage>
+			<percentage genre="Children">0.7</percentage>
+			<percentage genre="Sports">16.3</percentage>
+			<percentage genre="Racing">5.8</percentage>
+			<percentage genre="Casual">5.2</percentage>
+		</platform>
+		<platform type="computer">
+			<percentage genre="Strategy">33.6</percentage>
+			<percentage genre="Adventure">8.7</percentage>
+			<percentage genre="Fighting">No data</percentage>
+			<percentage genre="Family">0.1</percentage>
+			<percentage genre="Role-Playing">20.3</percentage>
+			<percentage genre="Shooter">9.7</percentage>
+			<percentage genre="Other">1.4</percentage>
+			<percentage genre="Arcade">0.1</percentage>
+			<percentage genre="Flight">1.5</percentage>
+			<percentage genre="Action">2.7</percentage>
+			<percentage genre="Children">0.9</percentage>
+			<percentage genre="Sports">0.9</percentage>
+			<percentage genre="Racing">0.6</percentage>
+			<percentage genre="Casual">19.5</percentage>
+		</platform>
+	</sales>
+	<sales year="2011">
+		<platform type="console">
+			<percentage genre="Strategy">2.8</percentage>
+			<percentage genre="Adventure">9.5</percentage>
+			<percentage genre="Fighting">3.7</percentage>
+			<percentage genre="Family">11.0</percentage>
+			<percentage genre="Role-Playing">7.2</percentage>
+			<percentage genre="Shooter">18.4</percentage>
+			<percentage genre="Other">2.1</percentage>
+			<percentage genre="Arcade">0.2</percentage>
+			<percentage genre="Flight">0.6</percentage>
+			<percentage genre="Action">19.0</percentage>
+			<percentage genre="Children">0.8</percentage>
+			<percentage genre="Sports">14.8</percentage>
+			<percentage genre="Racing">5.8</percentage>
+			<percentage genre="Casual">4.0</percentage>
+		</platform>
+		<platform type="computer">
+			<percentage genre="Strategy">27.6</percentage>
+			<percentage genre="Adventure">9.2</percentage>
+			<percentage genre="Fighting">No data</percentage>
+			<percentage genre="Family">0.1</percentage>
+			<percentage genre="Role-Playing">21.1</percentage>
+			<percentage genre="Shooter">13.0</percentage>
+			<percentage genre="Other">2.0</percentage>
+			<percentage genre="Arcade">0.1</percentage>
+			<percentage genre="Flight">1.6</percentage>
+			<percentage genre="Action">2.7</percentage>
+			<percentage genre="Children">0.7</percentage>
+			<percentage genre="Sports">0.6</percentage>
+			<percentage genre="Racing">0.7</percentage>
+			<percentage genre="Casual">20.6</percentage>
+		</platform>
+	</sales>
+	<sales year="2012">
+		<platform type="console">
+			<percentage genre="Strategy">2.3</percentage>
+			<percentage genre="Adventure">8.3</percentage>
+			<percentage genre="Fighting">3.9</percentage>
+			<percentage genre="Family">8.6</percentage>
+			<percentage genre="Role-Playing">6.5</percentage>
+			<percentage genre="Shooter">21.2</percentage>
+			<percentage genre="Other">1.7</percentage>
+			<percentage genre="Arcade">0.2</percentage>
+			<percentage genre="Flight">0.3</percentage>
+			<percentage genre="Action">22.3</percentage>
+			<percentage genre="Children">0.5</percentage>
+			<percentage genre="Sports">15.3</percentage>
+			<percentage genre="Racing">5.8</percentage>
+			<percentage genre="Casual">3.0</percentage>
+		</platform>
+		<platform type="computer">
+			<percentage genre="Strategy">24.9</percentage>
+			<percentage genre="Adventure">7.1</percentage>
+			<percentage genre="Fighting">No data</percentage>
+			<percentage genre="Family">0.1</percentage>
+			<percentage genre="Role-Playing">28.0</percentage>
+			<percentage genre="Shooter">6.2</percentage>
+			<percentage genre="Other">3.2</percentage>
+			<percentage genre="Arcade">No data</percentage>
+			<percentage genre="Flight">0.7</percentage>
+			<percentage genre="Action">2.1</percentage>
+			<percentage genre="Children">0.1</percentage>
+			<percentage genre="Sports">0.4</percentage>
+			<percentage genre="Racing">0.5</percentage>
+			<percentage genre="Casual">26.7</percentage>
+		</platform>
+	</sales>
+</game_sales>

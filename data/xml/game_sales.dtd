@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!--
+    An example how to use this DTD from your XML document:
+
+    <?xml version="1.0"?>
+
+    <!DOCTYPE game_sales SYSTEM "trends.dtd">
+
+    <game_sales>
+        <sales year="2007">
+		<platform type="console">
+			<percentage genre="Strategy">4.7</percentage>
+                            ...
+			<percentage genre="Casual">No data</percentage>
+		</platform>
+            </sales>
+    </game_sales>
+-->
+
+<!--- Contains market share trends of games by platform and genre over a period of years. -->
+<!ELEMENT game_sales (sales+)>
+
+<!--- Contains market share breakdown of games by platform and genre in a given year. -->
+<!ELEMENT sales (platform)+>
+<!ATTLIST sales
+    year CDATA #REQUIRED
+  >
+
+<!--- The platform on which the games sold (either computer or console). -->
+<!ELEMENT platform (percentage)+>
+<!ATTLIST platform
+    type (computer|console) #REQUIRED
+  >
+
+<!--- Contains the market share for each game genre. -->
+<!ELEMENT percentage (#PCDATA)>
+<!ATTLIST percentage
+    genre CDATA #REQUIRED
+  >
