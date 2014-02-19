@@ -4,7 +4,8 @@
             <div>
                 <h1>{title}</h1>
                 <p>{username}</p>
-                <p>Last modified: {modified}</p>
+                <p>Last modified: {updated_at}</p>
+                <p>Created: {created_at}</p>
                 <a href="/blog/posts/{postid}" class="readmore">Read more &gt;&gt;</a>
             </div>
         </li>
