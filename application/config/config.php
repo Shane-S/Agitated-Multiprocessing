@@ -5,8 +5,11 @@ $config['menu_choices'] = array(
     'Home' => '/home',
     'About' => '/about',
     'Blog' => '/blog',
-    'Trends' => '/trends'
+    'Trends' => '/trends',
+    'Login' => '/login'
 );
+
+
 
 
 /*
