@@ -11,7 +11,7 @@ class Home extends Application {
 
     function __construct() {
         parent::__construct();
-        $this->load->model('post_data');
+        $this->load->model('posts');
     }
 
     /*
@@ -39,29 +39,20 @@ class Home extends Application {
      */
     function _build_recent_posts()
     {
-        $parsable_recent = array('recent_posts' => array());
-        $posts = $this->post_data->get_all_posts();
+        $parsable_recent = array();
+        $posts = $this->posts->getAll_array();
         $times = array();
 
-        foreach($posts as $postid => $post)
-            $times[$postid] = strtotime($posts[$postid]['created_at']);
+        foreach($posts as $post)
+            $times[$post['postid']] = strtotime($post['created_at']);
         
         array_multisort($times, SORT_DESC, $posts);
         $recent_posts = array_slice($posts, 0, 3);
 
-        foreach($recent_posts as $recent_post)
-        {
-            $thumb = '/data/images/' . $recent_post['thumb'];
-            $author = $this->post_data->get_author($recent_post['postid']);
+        foreach($recent_posts as &$recent_post)
+            $recent_post['thumb'] = '/data/images/' . $recent_post['thumb'];
 
-            $parsable_recent['recent_posts'][] = array(
-                'postid' => $recent_post['postid'],
-                'thumb' => $thumb, 
-                'title' => $recent_post['title'], 
-                'author_first' => $author['firstname'], 
-                'author_last' => $author['lastname'], 
-                'modified' => $recent_post['created_at']);
-        }
+        $parsable_recent['recent_posts'] = $recent_posts;
         return $this->parser->parse('_recent_posts', $parsable_recent, true);
     }
 

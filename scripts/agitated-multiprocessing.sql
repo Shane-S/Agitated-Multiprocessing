@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `post`
     `username`   VARCHAR(40) NOT NULL,
     `catid`      INT(11) NOT NULL,
     `title`      VARCHAR(80),
-    `content`    LONGTEXT,
+    `post_content` LONGTEXT,
     `updated_at` DATETIME,
     `created_at` DATETIME,
     `thumb`      VARCHAR(80),
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `post`
      CONSTRAINT fk_site_user FOREIGN KEY (`username`) REFERENCES site_user(`username`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-INSERT INTO `post`(`postid`, `username`, `catid`, `title`, `content`, `updated_at`, `created_at`, `thumb`) VALUES
+INSERT INTO `post`(`postid`, `username`, `catid`, `title`, `post_content`, `updated_at`, `created_at`, `thumb`) VALUES
 (1, 'konstabro', 1, 'Post 1', 'This is the first post ever made on this blog! UPDATE: It is now also the most recent one.', '2014-02-10 10:55:22', '2014-02-10 08:48:30', 'thumb_01.png'),
 (2, 'konstabro', 2, 'Post 2', 'The second post made on this blog. Not quite as exciting this time.', '2014-02-10 08:49:22', '2014-02-10 08:49:22', 'thumb_02.png'),
 (3, 'PrecisionConage', 3, 'Post 3', 'Unfortunately, the third post content could not be found. Here are some words instead.', '2014-02-10 08:55:42', '2014-02-10 08:55:42', 'thumb_03.png'),
