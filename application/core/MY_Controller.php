@@ -63,7 +63,7 @@ class Application extends CI_Controller {
 
         else
         {
-            $current_role = $this->session->userdata('userRole');
+            $current_role = $this->session->userdata('role');
             if ((is_array($required_access) && !in_array($current_role, $required_access))
                     || $current_role != $required_access)
             {

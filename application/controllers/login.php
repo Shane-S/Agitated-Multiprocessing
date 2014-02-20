@@ -31,10 +31,7 @@ class Login extends Application {
         if(isset($_POST['username']) && isset($_POST['password'])) {
             $key = $_POST['username'];
             $password = md5($_POST['password']);
-            //        echo 'key: '.$key.'<br/>';
-            //        echo 'password: '.$password.'<br/>';
-            //        exit;
-       
+
             $user = $this->users->get($key);
             if ($user == null) {
                 echo 'No such user<br/>';

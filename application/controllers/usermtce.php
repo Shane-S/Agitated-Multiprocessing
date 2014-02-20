@@ -5,7 +5,7 @@ class UserMtce extends Application
     function __construct()
     {
         parent::__construct();
-        //$this->restrict(ROLE_ADMIN);
+        $this->restrict(ROLE_ADMIN);
         $this->load->model('users');
     }
     
