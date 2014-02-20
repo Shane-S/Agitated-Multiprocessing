@@ -6,7 +6,8 @@ class Blog extends Application {
 
     function __construct() {
         parent::__construct();
-        $this->load->model('post_data');
+        $this->load->model('posts');
+        $this->load->model('media');
     }
 
     /*
@@ -48,24 +49,15 @@ class Blog extends Application {
      */
     function _build_allposts()
     {
-        $posts = $this->post_data->get_all_posts();
-        $parsable_posts = array('blog_posts' => array());
-        foreach($posts as $post)
+        $posts = $this->posts->getAll_array();
+        $parsable_posts = array('blog_posts' => &$posts);
+        foreach($posts as &$post)
         {
-            $trunc_content = (strlen($post['content']) > self::POST_CUTOFF) ? array_slice($post['content'], 0, POST_CUTOFF - 3) . '...'
-                    : $post['content'];
-            $author = $this->post_data->get_author($post['postid']);
-
-            $parsable_posts['blog_posts'][] = array(
-                'postid' => $post['postid'],
-                'thumb' => '/data/images/' . $post['thumb'],
-                'title' => $post['title'],
-                'trunc_content' => $trunc_content, 
-                'author_first' => $author['firstname'], 
-                'author_last' => $author['lastname'],
-                'updated_at' => $post['updated_at']);
+            $post['post_content'] = strlen($post['post_content']) > self::POST_CUTOFF ? 
+                    array_slice($post['post_content'], 0, self::POST_CUTOFF - 3) . '...' :
+                    $post['post_content'];
+            $post['thumb'] = '/data/images/' . $post['thumb'];
         }
-        
         return $this->parser->parse('_all_posts', $parsable_posts, true);
     }
     
@@ -80,19 +72,10 @@ class Blog extends Application {
      */
     function _build_singlepost($postid)
     {
-        $post = $this->post_data->get_post($postid);
-        $full_size_img = $this->post_data->get_image($postid);
-        $author = $this->post_data->get_author($postid);
-
-        $parsable_post = array(
-            'title' => $post['title'],
-            'author_first' => $author['firstname'],
-            'author_last' => $author['lastname'],
-            'full_size' => '/data/images/' . $full_size_img,
-            'content' => $post['content'],
-            'created_at' => $post['created_at'],
-            'updated_at' => $post['updated_at']);
+        $post = $this->posts->get_array($postid);
+        $imgs = $this->media->querySomeMore('thumbnail', $post['thumb']);
+        $post['full_size'] = '/data/images/' . $imgs[0]['filename'];
         
-        return $this->parser->parse('_single_post', $parsable_post, true);
+        return $this->parser->parse('_single_post', $post, true);
     }
 }
