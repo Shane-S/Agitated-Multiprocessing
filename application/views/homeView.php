@@ -12,7 +12,5 @@
     </div>
 </div>
 <div id="section">
-    <ul>
-        {recent_posts}
-    </ul>
+    {recent_posts}
 </div>

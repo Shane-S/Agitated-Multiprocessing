@@ -13,7 +13,7 @@ class Postmtce extends Application
         $all_posts = array();
         $all_posts['posts'] = $this->posts->getAll_array();
         $this->data['title'] = 'Post Maintenance';
-        $this->data['post_mtce_content'] = $this->parser->parse('_post_list', $all_posts, true);
+        $this->data['post_mtce_content'] = $this->parser->parse('_post_edit_list', $all_posts, true);
         $this->data['pagebody'] = 'postMtceView';
         $this->render();
     }
@@ -23,7 +23,7 @@ class Postmtce extends Application
         $post = $this->posts->get_array($postid);
         $post_title = $post['title'];
         $this->data['title'] = "Edit Post: $post_title"; 
-        $this->data['post_mtce_content'] = $this->parser->parse('_post_edit', $post, true);
+        $this->data['post_mtce_content'] = $this->parser->parse('_post_edit_list', $post, true);
         $this->data['pagebody'] = 'postMtceView';
         $this->data['postid'] = $postid;
         $this->render();
@@ -35,7 +35,7 @@ class Postmtce extends Application
                         'post_content' => '');
         $this->data['title'] = "New Post";
         $this->data['postid'] = 'new';
-        $this->data['post_mtce_content'] = $this->parser->parse('_post_edit', $post, true);
+        $this->data['post_mtce_content'] = $this->parser->parse('_post_edit_single', $post, true);
         $this->data['pagebody'] = 'postMtceView';
         $this->render();
     }
@@ -50,7 +50,7 @@ class Postmtce extends Application
     {
         // either create or retrieve the relevant user record
         if ($postid == null || $postid == 'new')
-            $post = $this->users->create();
+            $post = $this->posts->create();
         else
             $post = $this->posts->get($postid);
 

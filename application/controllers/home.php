@@ -52,8 +52,8 @@ class Home extends Application {
         foreach($recent_posts as &$recent_post)
             $recent_post['thumb'] = '/data/images/' . $recent_post['thumb'];
 
-        $parsable_recent['recent_posts'] = $recent_posts;
-        return $this->parser->parse('_recent_posts', $parsable_recent, true);
+        $parsable_recent['blog_posts'] = $recent_posts;
+        return $this->parser->parse('_all_posts', $parsable_recent, true);
     }
 
 }
