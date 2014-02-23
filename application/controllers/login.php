@@ -24,10 +24,8 @@ class Login extends Application {
     //  We should never get here, since the login form is in the sidebar
     //-------------------------------------------------------------
 
-    function index() {
-        $this->data['pagebody'] = 'loginView';
-        $this->render();
-        
+    function index()
+    {      
         if(isset($_POST['username']) && isset($_POST['password'])) {
             $key = $_POST['username'];
             $password = md5($_POST['password']);
@@ -35,7 +33,7 @@ class Login extends Application {
             $user = $this->users->get($key);
             if ($user == null) {
                 echo 'No such user<br/>';
-                redirect('/');
+                redirect('/login');
             }
             //check the password
             if ($password == (string) $user->password) {
@@ -46,8 +44,12 @@ class Login extends Application {
                 return;
             } else {
                    echo 'Password does not match<br/>';
-                   redirect("/");
+                   redirect("/login");
             }
+        }
+        else
+        {
+            $this->data['title'] = 'Login';
             $this->data['pagebody'] = 'loginview';
             $this->render();
         }

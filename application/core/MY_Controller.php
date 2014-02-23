@@ -56,6 +56,28 @@ class Application extends CI_Controller {
     }
 
     
+    function build_side_bar()
+    {
+        $result = '';
+
+        if ($this->session->userdata('user')) {
+            // show user name etc
+            $side_data = $this->session->all_userdata();
+            $side_data['secret_menu'] = '';
+            if ($this->session->userdata('userRole') == 'admin')
+                $side_data['secret_menu'] = $this->parser->parse('_admin', $side_data, true);
+            $result .= $this->parser->parse('_loggedin', $side_data, true);
+        } else {
+            // show the login form
+            $result .= $this->load->view('_login', $this->data, true);
+        }
+
+        // links
+        $result .= $this->link_away();
+
+        return $result;
+    }
+    
     function restrict($required_access = null)
     {
         if(!$required_access)
@@ -67,7 +89,7 @@ class Application extends CI_Controller {
             if ((is_array($required_access) && !in_array($current_role, $required_access))
                     || $current_role != $required_access)
             {
-                    redirect('/');
+                    redirect('/login');
                     return;
             }
         }

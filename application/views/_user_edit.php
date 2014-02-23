@@ -18,11 +18,15 @@ if (isset($errors) && count($errors) > 0) {
     <label for="password">Password</label>
     <input type="text" name="password" id="password" value="{password}" />
     <label for="firstname">First Name</label>
-    <input type="text" name="firstname" id="email" value="{firstname}" />
+    <input type="text" name="firstname" id="firstname" value="{firstname}" />
     <label for="lastname">Last Name</label>
-    <input type="text" name="lastname" id="email" value="{lastname}" />
+    <input type="text" name="lastname" id="lastname" value="{lastname}" />
     <label for="role">Role</label>
-    <input type="text" name="role" id="role" value="{role}" />
+    <select name="role">
+        {roles}
+        <option value="{role}">{role}</option>
+        {/roles}
+    </select>
     <label for="email">Email Address</label>
     <input type="text" name="email" id="email" value="{email}" />
     <br/><br/>

@@ -24,13 +24,28 @@ CREATE TABLE IF NOT EXISTS `site_user`
     `lastname`  VARCHAR(80),
     `email`     VARCHAR(100),
     `created_at`DATETIME NOT NULL,
-    `role`      ENUM('guest', 'visitor', 'user', 'admin'),
+    `role`      VARCHAR(20) NOT NULL,
+    CONSTRAINT fk_role FOREIGN KEY (`role`) REFERENCES user_role(`role`),
     PRIMARY KEY (`username`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 INSERT INTO `site_user`(`username`, `password`, `firstname`, `lastname`, `email`, `created_at`, `role`) VALUES
 ('PrecisionConage', '7790ffbb26cf6409e707105e92cde91e', 'Shane', 'Spoor', 'sspoor@my.bcit.ca', '2014-02-10 08:46:37', 'admin'),
 ('konstabro', '9115b9aab6fd005f51e429a39e9e9618', 'Konstantin', 'Boyarinov','kboyarinov@my.bcit.ca', '2014-02-10 08:47:48', 'admin');
+
+
+-- Role table --------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `user_role`
+(
+    `role` VARCHAR(20) NOT NULL,
+    PRIMARY KEY(`role`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+INSERT INTO `user_role` (`role`) VALUES
+('guest').
+('visitor'),
+('user'),
+('admin');
 
 -- Category table ----------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `category`
@@ -51,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `post`
     `postid`     INT(11) NOT NULL,
     `username`   VARCHAR(40) NOT NULL,
     `modified_by`VARCHAR(40) NOT NULL,
-    `catid`      INT(11) NOT NULL,
+    `catid`      INT(11),
     `title`      VARCHAR(80),
     `post_content` TEXT,
     `updated_at` DATETIME,

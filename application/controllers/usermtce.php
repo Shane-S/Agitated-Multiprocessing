@@ -7,6 +7,7 @@ class UserMtce extends Application
         parent::__construct();
         $this->restrict(ROLE_ADMIN);
         $this->load->model('users');
+        $this->load->model('roles');
     }
     
     function index()
@@ -21,8 +22,12 @@ class UserMtce extends Application
     
     function edit($username)
     {
+        $roles = array();
         $user = $this->users->get_array($username);
+        
         $user['password'] = '';
+        unset($user['role']);
+        $user['roles'] = $this->roles->getAll_array();
         $this->data['title'] = "Edit User: $username";
         $this->data['user_mtce_content'] = $this->parser->parse('_user_edit', $user, true);
         $this->data['pagebody'] = 'userMtceView';
@@ -32,13 +37,14 @@ class UserMtce extends Application
 
     function add()
     {
-        $user = array('username' => 'new',
+        $roles = array();
+        $user = array('username' => '',
                         'firstname' => '',
                         'lastname' => '',
                         'email' => '',
                         'created_at'=>'',
                         'password' => '',
-                        'role' => '');
+                        'roles' => $this->roles->getAll_array());
         $this->data['title'] = "Add User";
         $this->data['id'] = 'new';
         $this->data['user_mtce_content'] = $this->parser->parse('_user_edit', $user, true);
@@ -65,34 +71,6 @@ class UserMtce extends Application
 
         // over-ride the user record fields with submitted values
         fieldExtract($_POST, $user, $user_fields);
-        $this->data['errors'] = array();
-        // validate the user fields
-        if ($_POST['username'] == 'new' || empty($_POST['username']))
-            $this->data['errors'][] = 'You need to specify a userid';
-        else if ($username != 'new' && $username != null && $username != $_POST['username'])
-            $this->data['errors'][] = 'User names may not be changed.';
-        if ($username == null && $this->users->exists($_POST['username']))
-            $this->data['errors'][] = 'That username is already in use; please choose another.';
-        if (strlen($user->username) < 1)
-            $this->data['errors'][] = 'You need a user name';
-        else if(strlen ($user->username) > 40)
-            $this->data['errors'][] = 'User names must be 40 characters or less.';
-        if (strlen($user->email) < 1)
-            $this->data['errors'][] = 'You need an email address';
-        if (!strpos($user->email, '@'))
-            $this->data['errors'][] = 'The email address is missing the domain';
-        if ($username == null && empty($user->password))
-            $this->data['errors'][] = 'You must specify a password';
-
-        // if errors, redisplay the form
-        if (count($this->data['errors']) > 0) {
-            // over-ride the view parameters to reflect our data
-            $this->data['user_mtce_content'] = (array)$user;
-            $this->data['pagebody'] = 'userMtceView';
-            $this->render();
-            exit;
-        }
-
         // handle the password specially, as it needs to be encrypted
         $new_password = $_POST['password'];
         if (!empty($new_password)) {

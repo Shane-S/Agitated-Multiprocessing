@@ -50,7 +50,7 @@ class Home extends Application {
         $recent_posts = array_slice($posts, 0, 3);
 
         foreach($recent_posts as &$recent_post)
-            $recent_post['thumb'] = '/data/images/' . $recent_post['thumb'];
+            $recent_post['thumb'] = $recent_post['thumb'] ? '/data/images/' . $recent_post['thumb'] : '';
 
         $parsable_recent['blog_posts'] = $recent_posts;
         return $this->parser->parse('_all_posts', $parsable_recent, true);

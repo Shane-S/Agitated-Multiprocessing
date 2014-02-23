@@ -1,4 +1,4 @@
-<form action="postmtce/submit/{postid}">
+<form action="/postmtce/submit/{postid}" method="post">
     <label for="title">Title</label>
     <input type="text" value="{title}" name="title"/>
     <br/>

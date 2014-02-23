@@ -56,7 +56,7 @@ class Blog extends Application {
             $post['post_content'] = strlen($post['post_content']) > self::POST_CUTOFF ? 
                     array_slice($post['post_content'], 0, self::POST_CUTOFF - 3) . '...' :
                     $post['post_content'];
-            $post['thumb'] = '/data/images/' . $post['thumb'];
+            $post['thumb'] = $post['thumb'] ? '/data/images/' . $post['thumb'] : '';
         }
         return $this->parser->parse('_all_posts', $parsable_posts, true);
     }
@@ -74,7 +74,7 @@ class Blog extends Application {
     {
         $post = $this->posts->get_array($postid);
         $imgs = $this->media->querySomeMore('thumbnail', $post['thumb']);
-        $post['full_size'] = '/data/images/' . $imgs[0]['filename'];
+        $post['full_size'] = $imgs ? '/data/images/' . $imgs[0]['filename'] : '';
         
         return $this->parser->parse('_single_post', $post, true);
     }
