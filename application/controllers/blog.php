@@ -56,7 +56,7 @@ class Blog extends Application {
             $post['post_content'] = strlen($post['post_content']) > self::POST_CUTOFF ? 
                     array_slice($post['post_content'], 0, self::POST_CUTOFF - 3) . '...' :
                     $post['post_content'];
-            $post['thumb'] = $post['thumb'] ? '/data/images/' . $post['thumb'] : '';
+            $post['thumb'] = $post['thumb'] ? '/data/thumbs/' . $post['thumb'] : '';
         }
         return $this->parser->parse('_all_posts', $parsable_posts, true);
     }
