@@ -1,13 +1,18 @@
 /* Website template by freewebsitetemplates.com */
+html {
+    height: 100%;
+}
+
 body {
 	background: #ffffff;
 	color: black;
 	font-family: 'QuestrialRegular';
 	font-size: 16px;
-	margin: 0;
+	margin-left: auto;
+        margin-right: auto;
 	min-width: 910px;
 	padding: 0;
-        
+        height:100%;
 }
 @font-face {
 	font-family: 'QuestrialRegular';
@@ -25,87 +30,126 @@ a {
 img {
 	border: 0;
 }
+
+#container {
+    position: relative;
+    min-height: 100%;
+    background-image: url('http://firstpersonshooters.net/Games/-=franchise=-/Halo/3/ODST/images/wallpaper/Halo3-ODST_8.jpg');
+}
+
+#main {
+    overflow:auto;
+    padding-bottom: 200px;
+}
+
 #header {
-     background: #fbf804;
+    margin: 0 auto;
+    background: #666;
+    width: 1200px;
 }
-#header div {
+
+#header #login {
+    position: absolute;
+    padding: 10px 10px 10px 10px;
+    top: 20px;
+    right: 12.5px;
+    width: 300px;
+    border: #091255 solid 3px;
+    background-color: #5d68bf;
+    color: white;
+    font-size: 18px;
+    font-family: QuestrialRegular;
+}
+
+#header #login a {
+    color: white;
+}
+
+#header #title-menu {
 	margin: 0 auto;
-	width: 1410px;
+        height: 304px;
+	width: 1200px;
+        box-shadow: -5px 0px 30px #444, 5px 0px 30px #444, 0px 50px 30px #444;
 }
-#header div a.logo {
-	background: url('/assets/images/TitleBar.jpg') no-repeat left top;
-	display: block;
-	height: 250px;
-	text-indent: -99999px;
+#header #title-menu a.logo {
+    background: url('/assets/images/title-logo.png') no-repeat left top;
+    display: block;
+    height: 160px;
+    position: relative;
+    top: 50px;
+    left: 20px;
+    text-indent: -99999px;
 }
-#header div ul {
-        background: #fbf804;
+#header #title-menu ul {
+        background: #091255;
 	list-style: none;
 	margin: 0 0;
 	overflow: hidden;
 	padding: 0;
 }
-#header div ul li {
-        background: #fbf804;
+
+#header #title-menu #left-brace {
+    position: relative;
+    top: 75px;
+    left: 190px;
+    z-index: 1;
+}
+
+#header #title-menu #right-brace {
+    position: relative;
+    left: 908px;
+    bottom: 68px;
+    z-index: 1;
+}
+
+#header #title-menu ul li {
+        background: #091255;
 	float: left;
-	margin: 0 auto;
 	position: relative;
-	width: 300px;
+        left: 220px;
         overflow: hidden;
 }
-#header div ul li.current a,
-#header div ul li.current a:hover,
-#header div ul li a:hover {
+#header #title-menu ul li.current a,
+#header #title-menu ul li.current a:hover,
+#header #title-menu ul li a:hover {
 	background: url('/assets/images/menu-selected.png') no-repeat right center;
 	color: #424141;
 }
-#header div ul li a:hover {
+#header #title-menu ul li a:hover {
 	background: none;
 }
-#header div ul li a {
+#header #title-menu ul li a {
 	background: none;
 	color: #FFFFFF;
 	display: inline-block;
-	font-size: 28px;
+	font-size: 30px;
+        font-family: Consolas;
 	height: 54px;
 	line-height: 54px;
-        font-weight: 200;
 	padding: 0;
 	text-decoration: none;
-	text-transform: uppercase;
+        text-transform: uppercase;
         overflow: hidden;
-}
-#header div ul li a.Home {
-	padding: 0 28px 20px 50px;
-}
-#header div ul li a.About {
-	padding: 0 28px 0 00px;
-}
-#header div ul li a.Blog {
-	padding: 0 28px 0 0px;
-}
-#header div ul li a.Services {
-	padding: 0 28px 0 0px;
-}
-#header div ul li a.Friends {
-        padding: 0 28px 0 0px;
-}
-#header div ul li a.Trends {
-        padding: 0 28px 0 0px;
+        padding: 5px 30px 0px 30px;
 }
 
+
+#body
+{
+    padding-bottom: 100px;
+    overflow: auto;
+}
 
 #body div#background {
-	background: #048afb;
 	min-height: 380px;
 	padding: 0;
-	width: auto;
+	width: 1300px;
 }
 #body div#background div {
 	margin: 0 0;
 	overflow: hidden;
 	padding: 0px 0 0px;
-	width: 1410px;
+	width: 500px;
 }
 
 #body div#background div div {
@@ -213,9 +257,10 @@ p a:hover {
 	width: 320px;
 }
 #body div#section {
-	background: #17dc33;
+	background: #5d68bf;
 	padding: 0;
-	width: 100%;
+	width: 1200px;
+        box-shadow: -5px 0px 30px #444, 5px 0px 30px #444, 0px 5px 30px #444;
 }
 #body div ul {
 	list-style: none;
@@ -382,19 +427,19 @@ p a:hover {
 	display: inline;
 	padding: 0 5px;
 }
+
 #footer {
-	margin: 0 auto;
-	min-height: 85px;
-	overflow: hidden;
-	width: auto;
-        background: #fbf804;
+    position: relative;
+    margin: -200px auto 0 auto;
+    clear:both; 
+    min-height: 85px;
+    overflow: hidden;
+    width: auto;
+    height: 200px;
+    background: #091255;
+    padding: 0 10px 0 10px;
 }
-#footer div.logo {
-	float: left;
-	padding: 27px 0 0;
-	width: 220px;
-        
-}
+
 #footer div.logo a img {
 	display: block;
 }
@@ -402,14 +447,13 @@ p a:hover {
 	float: left;
 	list-style: none;
 	margin: 3px 0 0;
-	overflow: hidden;
+	overflow: auto;
 	padding: 33px 0 0;
-	width: 220px;
+	width: 350px;
 }
 #footer ul li {
-	border-left: 1px solid #FFFFFF;
 	float: left;
-	height: 10px; 
+	height: 25px;
 }
 #footer ul li:first-child {
 	border: 0;
@@ -418,8 +462,8 @@ p a:hover {
 	color: #85603a;
 	display: block;
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-	font-size: 10px;
-	line-height: 9px;
+	font-size: 18px;
+	line-height: 50%;
 	padding: 0 5px;
 	text-align: center;
 	text-decoration: none;
@@ -429,7 +473,7 @@ p a:hover {
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 	font-size: 10px;
 	float: left;
-	line-height: 16px;
+        line-height: 16px;
 	margin: 0;
 	padding: 33px 0 0;
 	width: 280px;

@@ -1,5 +1,4 @@
-
-<div class="login">
+<div id="login">
     Hi, {username}! ({role})<br/>
     {secret_menu}
     <a href="/logout">Logout</a><br/>

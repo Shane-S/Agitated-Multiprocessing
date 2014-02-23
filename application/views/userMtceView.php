@@ -1,4 +1,4 @@
-<div>
+<div id="section">
     <h1>User Maintenance</h1>
     {user_mtce_content}
 </div>

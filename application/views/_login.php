@@ -1,4 +1,4 @@
-<div class="login">
+<div id="login">
     Hello, guest!<br/>
     <form action="/login" method="post">
         <input name="username" type="text" value=""/>

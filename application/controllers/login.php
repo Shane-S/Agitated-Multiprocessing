@@ -32,7 +32,6 @@ class Login extends Application {
 
             $user = $this->users->get($key);
             if ($user == null) {
-                echo 'No such user<br/>';
                 redirect('/login');
             }
             //check the password
