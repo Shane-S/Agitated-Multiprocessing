@@ -25,7 +25,7 @@ class Login extends Application {
     //-------------------------------------------------------------
 
     function index()
-    {      
+    {
         if(isset($_POST['username']) && isset($_POST['password'])) {
             $key = $_POST['username'];
             $password = md5($_POST['password']);

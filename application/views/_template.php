@@ -21,6 +21,7 @@ if (!defined('APPPATH'))
     </head>
     <body>
         <div id="header">
+            {sidebar}
             <div>
                 <a href="/" class="logo">PugSureWoi</a>
                 <ul>

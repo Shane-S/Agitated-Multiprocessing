@@ -37,6 +37,7 @@ class Application extends CI_Controller {
             $menu['Logout'] = '/logout';
         }
         $this->data['menubar'] = $this->build_menu_bar($menu);
+        $this->data['sidebar'] = $this->build_side_bar();
         $this->data['content'] = $this->parser->parse($this->data['pagebody'], $this->data, true);
 
         // finally, build the browser page!
@@ -60,21 +61,17 @@ class Application extends CI_Controller {
     {
         $result = '';
 
-        if ($this->session->userdata('user')) {
+        if ($this->session->userdata('username')) {
             // show user name etc
             $side_data = $this->session->all_userdata();
             $side_data['secret_menu'] = '';
-            if ($this->session->userdata('userRole') == 'admin')
-                $side_data['secret_menu'] = $this->parser->parse('_admin', $side_data, true);
+            if ($this->session->userdata('role') == 'admin')
+                $side_data['secret_menu'] = $this->parser->parse('_admin_menu', $side_data, true);
             $result .= $this->parser->parse('_loggedin', $side_data, true);
         } else {
             // show the login form
             $result .= $this->load->view('_login', $this->data, true);
         }
-
-        // links
-        $result .= $this->link_away();
-
         return $result;
     }
     
