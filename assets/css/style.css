@@ -90,7 +90,7 @@ img {
 
 #header #title-menu #left-brace {
     position: relative;
-    top: 75px;
+    top: 76px;
     left: 190px;
     z-index: 1;
 }
@@ -113,7 +113,7 @@ img {
 #header #title-menu ul li.current a:hover,
 #header #title-menu ul li a:hover {
 	background: url('/assets/images/menu-selected.png') no-repeat right center;
-	color: #424141;
+	color: #aaa;
 }
 #header #title-menu ul li a:hover {
 	background: none;
