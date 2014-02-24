@@ -60,13 +60,14 @@ class Application extends CI_Controller {
     function build_side_bar()
     {
         $result = '';
+        $current_role = $this->session->userdata('role');
 
         if ($this->session->userdata('username')) {
             // show user name etc
             $side_data = $this->session->all_userdata();
             $side_data['secret_menu'] = '';
-            if ($this->session->userdata('role') == 'admin')
-                $side_data['secret_menu'] = $this->parser->parse('_admin_menu', $side_data, true);
+                if ($current_role == 'admin')
+                    $side_data['secret_menu'] = $this->parser->parse('_admin_menu', $side_data, true);
             $result .= $this->parser->parse('_loggedin', $side_data, true);
         } else {
             // show the login form
@@ -83,8 +84,9 @@ class Application extends CI_Controller {
         else
         {
             $current_role = $this->session->userdata('role');
-            if ((is_array($required_access) && !in_array($current_role, $required_access))
-                    || $current_role != $required_access)
+
+            if (is_array($required_access) && !in_array($current_role, $required_access)
+                    || (!is_array($required_access) && $current_role != $required_access))
             {
                     redirect('/login');
                     return;

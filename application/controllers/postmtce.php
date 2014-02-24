@@ -5,7 +5,7 @@ class Postmtce extends Application
     function __construct()
     {
         parent::__construct();
-        $this->restrict(ROLE_USER);
+        $this->restrict(array(ROLE_USER, ROLE_ADMIN));
         $this->load->model('posts');
     }
     

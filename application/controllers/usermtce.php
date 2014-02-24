@@ -22,19 +22,35 @@ class UserMtce extends Application
     
     function edit($username)
     {
-        $roles = array();
-        $user = $this->users->get_array($username);
+        $roles_label        = makeLabel('roles', 'Roles');
+        $firstname_label    = makeLabel('firstname', 'First Name');
+        $lastname_label     = makeLabel('lasname', 'Last Name');
+        $email_label        = makeLabel('email', 'Email');
+        $submit_button      = makeSubmit('Submit');
+        $cancel_button      = makeButton('Cancel');
+        $user_edit_form     = array();
+        $user               = $this->users->get_array($username);
         
-        $user['password'] = '';
-        unset($user['role']);
-        $user['roles'] = $this->roles->getAll_array();
+        /* Set up the view template parameters */
+        $user_edit_form['username']         = $username;
+        $user_edit_form['username_input']   = makeLabel('username', 'Username: ' . $username);
+        $user_edit_form['password_input']   = '';
+        $user_edit_form['roles_input']      = makeComboField($roles_label, 'role', $this->roles->getAll_array(), 25);
+        $user_edit_form['firstname_input']  = makeTextField($firstname_label, 'firstname', 'text', $user['firstname'], 40);
+        $user_edit_form['lastname_input']   = makeTextField($lastname_label, 'lastname', 'text', $user['lastname'], 40);
+        $user_edit_form['email_input']      = makeTextField($email_label, 'email', 'text', $user['email'], 40);
+        $user_edit_form['actions']          = $submit_button . $cancel_button;
+        
+
         $this->data['title'] = "Edit User: $username";
-        $this->data['user_mtce_content'] = $this->parser->parse('_user_edit', $user, true);
+        $this->data['user_mtce_content'] = $this->parser->parse('_user_edit', $user_edit_form, true);
         $this->data['pagebody'] = 'userMtceView';
         $this->data['username'] = $username;
         $this->render();
     }
 
+    
+    
     function add()
     {
         $roles = array();

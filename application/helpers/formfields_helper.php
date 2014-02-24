@@ -65,12 +65,12 @@ function makeTextField($label, $name, $type="text", $value='', $width_class = 10
  * @param int $size width in ems of the input control
  * @param boolean $disabled True if non-editable
  */
-function makeComboField($label, $name, $value, $options, $required = false, $explain = "", $width_class = 100, $maxlen = 40, $size = 25, $disabled = false, $keep = TRUE) {
+function makeComboField($label, $name, $options, $width_class = 100,  $explain = "", $required = false, $maxlen = 40, 
+        $size = 25, $disabled = false, $keep = TRUE) {
     $CI = &get_instance();
     $parms = array(
         'label' => makeLabel($name, $label, $required, $keep),
         'name' => $name,
-        'value' => htmlentities($value, ENT_COMPAT, 'UTF-8'),
         'description' => makeDescription($explain),
         'maxlen' => $maxlen,
         'width' => $width_class,
