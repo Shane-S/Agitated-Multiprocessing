@@ -1,5 +1,3 @@
-<div>
-    <div id="content">
-        {blog_content}
-    </div>
+<div id="section">
+    {blog_content}
 </div>

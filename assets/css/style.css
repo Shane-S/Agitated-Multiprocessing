@@ -261,6 +261,7 @@ p a:hover {
 	padding: 0;
 	width: 1200px;
         box-shadow: -5px 0px 30px #444, 5px 0px 30px #444, 0px 5px 30px #444;
+        padding-top: 30px;
 }
 #body div ul {
 	list-style: none;
@@ -297,6 +298,7 @@ p a:hover {
 	padding: 0;
 	width: 592px;
 }
+
 #body div#section ul li div p {
 	color: #eeb58c;
 	line-height: 30px;

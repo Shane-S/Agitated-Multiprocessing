@@ -1,1 +1,3 @@
-<button class="btn btn-primary {css_extras}" type="submit" title="{title}">{label}</button>
+<p>
+    <input type="submit" class="btn {css-extras}" value="{value}">
+</p>

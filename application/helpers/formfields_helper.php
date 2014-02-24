@@ -28,43 +28,29 @@ if (!defined('APPPATH'))
  * @param int $size width in ems of the input control
  * @param boolean $disabled True if non-editable
  */
-function makeTextField($label, $name, $value, $explain = "", $maxlen = 40, $size = 25, $disabled = false, $keep = TRUE) {
+function makeTextField($label, $name, $type="text", $value='', $width_class = 100, $explain = "", $prepend = "", $append = "", $required = false, 
+        $maxlen = 40, $placeholder = '', $disabled = false, $keep = TRUE) {
     $CI = &get_instance();
+    
+    if($prepend != "")
+        $prepend = $CI->parser->parse('_fields/xpend', array('_xpend' => 'pre', 'text' => $prepend), $keep);
+    if($append != "")
+        $append = $CI->parser->parse('_fields/xpend', array('_xpend' => 'ap', 'text' => $append), $keep);
+
     $parms = array(
-        'label' => $label,
+        'label' =>  makeLabel($name, $label, $required, $keep),
         'name' => $name,
         'value' => htmlentities($value, ENT_COMPAT, 'UTF-8'),
+        'prepend' => $prepend,
+        'append' => $append,
         'explain' => $explain,
         'maxlen' => $maxlen,
-        'size' => $size,
+        'width' => $width_class,
+        'placeholder' => $placeholder,
+        'type' => $type,
         'disabled' => ($disabled ? 'disabled="disabled"' : '')
     );
     return $CI->parser->parse('_fields/textfield', $parms, $keep);
-}
-
-/**
- *  Construct a password text input.
- * 
- * @param string $label Descriptive label for the control
- * @param string $name ID and name of the control; s/b the same as the RDB table column
- * @param mixed $value Initial value for the control
- * @param string $explain Help text for the control
- * @param int $maxlen Maximum length of the value, characters
- * @param int $size width in ems of the input control
- * @param boolean $disabled True if non-editable
- */
-function makePasswordField($label, $name, $value, $explain = "", $maxlen = 40, $size = 25, $disabled = false, $keep = TRUE) {
-    $CI = &get_instance();
-    $parms = array(
-        'label' => $label,
-        'name' => $name,
-        'value' => htmlentities($value, ENT_COMPAT, 'UTF-8'),
-        'explain' => $explain,
-        'maxlen' => $maxlen,
-        'size' => $size,
-        'disabled' => ($disabled ? 'disabled="disabled"' : '')
-    );
-    return $CI->parser->parse('_fields/password', $parms, $keep);
 }
 
 /**
@@ -79,30 +65,150 @@ function makePasswordField($label, $name, $value, $explain = "", $maxlen = 40, $
  * @param int $size width in ems of the input control
  * @param boolean $disabled True if non-editable
  */
-function makeComboField($label, $name, $value, $options, $explain = "", $maxlen = 40, $size = 25, $disabled = false, $keep = TRUE) {
+function makeComboField($label, $name, $value, $options, $required = false, $explain = "", $width_class = 100, $maxlen = 40, $size = 25, $disabled = false, $keep = TRUE) {
     $CI = &get_instance();
     $parms = array(
-        'label' => $label,
+        'label' => makeLabel($name, $label, $required, $keep),
         'name' => $name,
         'value' => htmlentities($value, ENT_COMPAT, 'UTF-8'),
-        'explain' => $explain,
+        'description' => makeDescription($explain),
         'maxlen' => $maxlen,
+        'width' => $width_class,
         'size' => $size,
+        'options' => $options,
         'disabled' => ($disabled ? 'disabled="disabled"' : '')
     );
-
-    $choices = array();
-    foreach ($options as $val => $display) {
-        $row = array(
-            'val' => $val,
-            'selected' => ($val == $value) ? 'selected="true"' : '',
-            'display' => htmlentities($display)
-        );
-        $choices[] = $row;
-    }
-    $parms['options'] = $choices;
-
     return $CI->parser->parse('_fields/combofield', $parms, $keep);
+}
+
+/**
+ * 
+ * 
+ * @param type $for
+ * @param type $text
+ * @param type $required
+ * @param type $keep
+ * @return type
+ */
+function makeLabel($for, $text, $required = false, $keep = TRUE)
+{
+    $CI = &get_instance();
+    
+    $parms = array(
+        'for' => $for,
+        'text' => $text,
+        'required' => $required
+    );
+    return $CI->parser->parse('_fields/label', $parms, $keep);
+}
+
+/**
+ * 
+ * @param type $body
+ * @param type $head
+ * @param type $footer
+ * @param type $caption
+ * @param type $width
+ * @param type $keep
+ * @return type
+ */
+function makeTable($body, $head, $footer = null, $caption = null, $width = 100, $keep = TRUE)
+{
+    $CI = &get_instance();
+    $parms = array(
+        'head' => $head,
+        'body' => $body,
+        'footer' => $footer,
+        'caption' => $caption,
+        'width' => $width
+    );
+    return $CI->parser->parse('_fields/table', $parms, $keep);
+}
+
+/**
+ * 
+ * @param type $headers
+ * @param type $keep
+ * @return type
+ */
+function makeTableHead($headers, $keep = TRUE)
+{
+    $CI = &get_instance();
+    $parms = array(
+        'headers'=>$headers
+    );
+    return $CI->parser->parse('_fields/table_header', $parms, $keep);
+}
+
+/**
+ * 
+ * @param type $rows
+ * @param type $keep
+ */
+function makeTableBody($rows, $keep = TRUE)
+{
+    $CI = &get_instance();
+    $parms = array('rows' => $rows);
+
+    return $CI->parser->parse('_fields/table_body', $parms, $keep);
+}
+
+/**
+ * 
+ * @param type $footer_content
+ * @param type $keep
+ * @return type
+ */
+function makeTableFooter($footer_content, $keep = TRUE)
+{
+    $CI = &get_instance();
+    $parms = array('footer_cols' => $footer_content);
+
+    return $CI->parser->parse('_fields/table_foot', $parms, $keep); 
+}
+
+/**
+ * 
+ * 
+ * @param type $text
+ * @return type
+ */
+function makeButton($text, $keep = TRUE)
+{
+    $CI = &get_instance();
+    
+    $parms = array('text' => $text );
+    return $CI->parser->parse('_fields/button', $parms, $keep);
+}
+
+/**
+ * 
+ * @param type $text
+ * @param type $css_extras
+ * @param type $keep
+ * @return type
+ */
+function makeSubmit($text, $css_extras = "", $keep = TRUE)
+{
+    $CI = &get_instance();
+    
+    $parms = array('value' => $text, 'css-extras' => $css_extras);
+    return $CI->parser->parse('_fields/submit', $parms, $keep);
+}
+
+/**
+ * Make a link button.
+ * 
+ * @param type $description
+ * @return string
+ */
+function makeDescription($description)
+{
+    if($description == null || $description == "")
+        return "";
+
+    $CI = &get_instance();
+    return $CI->parser->parse('_fields/description', $description, $keep);
 }
 
 /**
@@ -351,12 +457,16 @@ function makeCheckbox($label, $name, $value, $explain = "", $disabled = false, $
  */
 function makeRadioButton($label, $name, $value, $explain = "", $disabled = false, $keep = TRUE) {
     $CI = &get_instance();
+    if($explain != "")
+        $explain = $CI->parser->parse('_fields/description', $explain, $keep);
+    $label = $CI->parser->parse('_fields/label', $label, $keep);
+    
     $parms = array(
         'label' => $label,
         'name' => $name,
         'value' => $value,
         'checked' => ($value == 'Y') ? 'checked' : '',
-        'explain' => ($explain <> "") ? $explain : $name,
+        'explain' => $explain,
         'disabled' => ($disabled ? 'disabled="disabled"' : '')
     );
     return $CI->parser->parse('_fields/checkbox', $parms, $keep);

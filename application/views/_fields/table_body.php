@@ -1,0 +1,9 @@
+<tbody>
+    {rows}
+    <tr>
+        {cols}
+        <td>{col_content}</td>
+        {/cols}
+    </tr>
+    {/rows}
+</tbody>

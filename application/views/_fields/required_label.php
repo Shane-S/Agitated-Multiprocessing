@@ -1,0 +1,1 @@
+<label for="{for}">{text}<em class="req">*</em></label>

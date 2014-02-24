@@ -1,11 +1,9 @@
-<div class="control-group">
-    <label class="control-label" for="{name}">{label}</label>
-    <div class="controls">
-        <select id="{name}" name="{name}" value="{value}" maxLength="{maxlen}" style="width:{size}em" {disabled}>
-                {options}
-                <option value="{val}" {selected}>{display}</option>
+<p>
+    {label}
+    <select name="{name}" {disabled} class="width-{width}">
+            {options}
+            <option>{option}</option>
             {/options}
-        </select>
-        <small>{explain}</small>
-    </div>
-</div>
+    </select>
+    {description}
+</p>
