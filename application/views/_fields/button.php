@@ -1,1 +1,1 @@
-<button class="btn btn-blue">{text}</button>
+<input type="button" class="btn {css-extras}" value="{text}"/>

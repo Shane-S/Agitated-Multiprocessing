@@ -21,6 +21,8 @@ if (!defined('APPPATH'))
         <script type="text/javascript" src="kube.buttons.js"></script>
 	<script type="text/javascript" src="/assets/js/jquery-1.7.min.js"></script>	
 	<script type="text/javascript" src="/assets/js/kube.datepicker.min.js"></script>
+        <script type="text/javascript" src="/assets/js/navbar.js"></script>
+        <script type="text/javascript" src="/assets/js/hoverIntent.js"></script>
 	<link rel="stylesheet" type="text/css" href="/assets/css/kube.datepicker.css" /> 
         <link rel="stylesheet" type="text/css" href="/assets/css/master.css">
         <link rel="stylesheet" type="text/css" href="/assets/css/kube.min.css">
@@ -31,12 +33,9 @@ if (!defined('APPPATH'))
             <div id="main">
                 <div id="header">
                     {sidebar}
-                    <div id="title-menu">
-                        <a href="/" class="logo"></a>
-                        <img id="left-brace" src="/assets/images/left-brace.png" alt="left-brace"/>
-                        {menubar}
-                        <img id="right-brace" src="/assets/images/right-brace.png" alt="right-brace"/>
-                    </div>
+                    <div id="gutter"></div>
+                    <a href="/" class="logo"></a>
+                    {menubar}
                 </div>
                 <div id="body">
                     {content}
@@ -44,7 +43,6 @@ if (!defined('APPPATH'))
             </div>
         </div>
         <div id="footer">
-            {menubar}
             <p>
                 &copy; Copyright &copy; 2023. Company name all rights reserved
             </p>

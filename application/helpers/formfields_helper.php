@@ -28,8 +28,8 @@ if (!defined('APPPATH'))
  * @param int $size width in ems of the input control
  * @param boolean $disabled True if non-editable
  */
-function makeTextField($label, $name, $type="text", $value='', $width_class = 100, $explain = "", $prepend = "", $append = "", $required = false, 
-        $maxlen = 40, $placeholder = '', $disabled = false, $keep = TRUE) {
+function makeTextField($label, $name, $type="text", $value='', $width_class = 100,  $maxlen = 40, $explain = '', $prepend = "", $append = "", 
+        $required = false, $placeholder = '', $disabled = false, $keep = TRUE) {
     $CI = &get_instance();
     
     if($prepend != "")
@@ -38,7 +38,7 @@ function makeTextField($label, $name, $type="text", $value='', $width_class = 10
         $append = $CI->parser->parse('_fields/xpend', array('_xpend' => 'ap', 'text' => $append), $keep);
 
     $parms = array(
-        'label' =>  makeLabel($name, $label, $required, $keep),
+        'label' => $label,
         'name' => $name,
         'value' => htmlentities($value, ENT_COMPAT, 'UTF-8'),
         'prepend' => $prepend,
@@ -100,6 +100,35 @@ function makeLabel($for, $text, $required = false, $keep = TRUE)
         'required' => $required
     );
     return $CI->parser->parse('_fields/label', $parms, $keep);
+}
+
+/**
+ * 
+ */
+function makeParagraph($content, $id='', $class='', $keep = TRUE)
+{
+    $CI = &get_instance();
+    $parms = array('content' => $content);
+    if($id != '')
+        $id = "id=\"$id\"";
+    if($class != '')
+        $class = "class=\"$class\"";
+    
+    $parms['class'] = $class; 
+    $parms['id'] = $id;
+
+    return $CI->parser->parse('_fields/paragraph', $parms, $keep);
+}
+
+/**
+ * 
+ * @param type $value
+ */
+function makeHidden($value, $name, $keep = TRUE)
+{
+    $CI = &get_instance();
+    $parms = array('value' => $value, 'name' => $name);
+    return $CI->parser->parse('_fields/hiddenfield', $parms, $keep);
 }
 
 /**
@@ -173,11 +202,11 @@ function makeTableFooter($footer_content, $keep = TRUE)
  * @param type $text
  * @return type
  */
-function makeButton($text, $keep = TRUE)
+function makeButton($text, $css_extras = '', $keep = TRUE)
 {
     $CI = &get_instance();
     
-    $parms = array('text' => $text );
+    $parms = array('text' => $text, 'css-extras' => $css_extras);
     return $CI->parser->parse('_fields/button', $parms, $keep);
 }
 
@@ -202,13 +231,13 @@ function makeSubmit($text, $css_extras = "", $keep = TRUE)
  * @param type $description
  * @return string
  */
-function makeDescription($description)
+function makeDescription($description, $keep = TRUE)
 {
     if($description == null || $description == "")
         return "";
-
+    $parms = array('description' => $description);
     $CI = &get_instance();
-    return $CI->parser->parse('_fields/description', $description, $keep);
+    return $CI->parser->parse('_fields/description', $parms, $keep);
 }
 
 /**

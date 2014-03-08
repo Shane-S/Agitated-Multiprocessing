@@ -31,125 +31,126 @@ img {
 	border: 0;
 }
 
+.btn-spaced{
+    margin: 0px 10px 10px 0px;
+}
+
 #container {
     position: relative;
     min-height: 100%;
-    background-image: url('http://firstpersonshooters.net/Games/-=franchise=-/Halo/3/ODST/images/wallpaper/Halo3-ODST_8.jpg');
+    background-image: url('http://halo.bungie.net/images/games/kdighekc/stills/odst_012209_01.jpg');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
 }
 
 #main {
     overflow:auto;
-    padding-bottom: 200px;
+    margin: 0 auto;
 }
 
 #header {
+    position: relative;
     margin: 0 auto;
     background: #666;
-    width: 1200px;
+    width: 100%;
+    height:14em;
+    min-width: 91.0625em;
 }
 
 #header #login {
-    position: absolute;
-    padding: 10px 10px 10px 10px;
-    top: 20px;
-    right: 12.5px;
-    width: 300px;
+    position:relative;
+    float:right;
     border: #091255 solid 3px;
     background-color: #5d68bf;
     color: white;
-    font-size: 18px;
+    width: 20%;
+    margin-right: 15%;
+    font-size: 1.125em;
     font-family: QuestrialRegular;
 }
 
-#header #login a {
-    color: white;
-}
-
-#header #title-menu {
-	margin: 0 auto;
-        height: 304px;
-	width: 1200px;
-        box-shadow: -5px 0px 30px #444, 5px 0px 30px #444, 0px 50px 30px #444;
-}
-#header #title-menu a.logo {
+#header a.logo {
+    min-height: 7.3125em;
     background: url('/assets/images/title-logo.png') no-repeat left top;
+    background-size: 53.0625em 7.3125em;
     display: block;
-    height: 160px;
     position: relative;
-    top: 50px;
-    left: 20px;
+    margin: 1% 0% 1% -5%;
+    float: left;
+    width: 58%;
     text-indent: -99999px;
 }
-#header #title-menu ul {
-        background: #091255;
-	list-style: none;
-	margin: 0 0;
-	overflow: hidden;
-	padding: 0;
+
+#header #gutter {
+    border: none;
+    background-color: #cccccc;
+    float: left;
+    margin: 0;
+    height: 100%;
+    border-right: 3px solid black;
+    width: 7%;
 }
 
-#header #title-menu #left-brace {
-    position: relative;
-    top: 76px;
-    left: 190px;
-    z-index: 1;
+#header #nav {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: #091255;
 }
 
-#header #title-menu #right-brace {
-    position: relative;
-    left: 908px;
-    bottom: 68px;
-    z-index: 1;
+#header #nav ul {
+    width: 70%;
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
 }
 
-#header #title-menu ul li {
-        background: #091255;
-	float: left;
-	position: relative;
-        left: 220px;
-        overflow: hidden;
+#header #nav ul li {
+    background: #091255;
+    float: left;
+    height: 54px;
+    padding: 0.25em 0 0.25em 0;
+    overflow: hidden;
+    font-size: 1.875em;
+    font-family: Consolas;
+    line-height: 54px;
+    text-transform: uppercase;
 }
-#header #title-menu ul li.current a,
-#header #title-menu ul li.current a:hover,
-#header #title-menu ul li a:hover {
+#header #nav ul li.current a,
+#header #nav ul li.current a:hover,
+#header #nav ul li a:hover {
 	background: url('/assets/images/menu-selected.png') no-repeat right center;
 	color: #aaa;
 }
-#header #title-menu ul li a:hover {
+#header #nav ul li a:hover {
 	background: none;
 }
-#header #title-menu ul li a {
-	background: none;
-	color: #FFFFFF;
-	display: inline-block;
-	font-size: 30px;
-        font-family: Consolas;
-	height: 54px;
-	line-height: 54px;
-	padding: 0;
-	text-decoration: none;
-        text-transform: uppercase;
-        overflow: hidden;
-        padding: 5px 30px 0px 30px;
+#header #nav ul li a {
+    color: #fff;
+    text-decoration: none;
 }
 
+#header .brace {
+   opacity:0;
+   font-size: 1.5em;
+   color:white;
+}
 
 #body
 {
     padding-bottom: 100px;
+    width: 100%;
     overflow: auto;
 }
 
 #body div#background {
 	min-height: 380px;
 	padding: 0;
-	width: 1300px;
 }
 #body div#background div {
 	margin: 0 0;
 	overflow: hidden;
 	padding: 0px 0 0px;
-	width: 500px;
 }
 
 #body div#background div div {
@@ -259,10 +260,22 @@ p a:hover {
 #body div#section {
 	background: #5d68bf;
 	padding: 0;
-	width: 1200px;
-        box-shadow: -5px 0px 30px #444, 5px 0px 30px #444, 0px 5px 30px #444;
-        padding-top: 30px;
+	width: 70%;
+        min-width: 1020px;
+        box-shadow: -0.3125em 0 1.875em #444, 0.3125em 0 1.875em #444;
 }
+
+#body div#section form#user-edit {
+    position:relative;
+    left: 70px;
+}
+
+#body div#section h1.mtce-title{
+    position:relative;
+    left: 40px;
+    padding: 0 0 30px 0;
+}
+
 #body div ul {
 	list-style: none;
 	margin: 0 22px;
@@ -432,7 +445,7 @@ p a:hover {
 
 #footer {
     position: relative;
-    margin: -200px auto 0 auto;
+    margin: 0 auto 0 auto;
     clear:both; 
     min-height: 85px;
     overflow: hidden;
@@ -451,7 +464,7 @@ p a:hover {
 	margin: 3px 0 0;
 	overflow: auto;
 	padding: 33px 0 0;
-	width: 350px;
+	width: 400px;
 }
 #footer ul li {
 	float: left;

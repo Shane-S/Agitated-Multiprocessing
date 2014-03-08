@@ -22,25 +22,26 @@ class UserMtce extends Application
     
     function edit($username)
     {
+        $user               = $this->users->get_array($username);
         $roles_label        = makeLabel('roles', 'Roles');
         $firstname_label    = makeLabel('firstname', 'First Name');
         $lastname_label     = makeLabel('lasname', 'Last Name');
         $email_label        = makeLabel('email', 'Email');
-        $submit_button      = makeSubmit('Submit');
-        $cancel_button      = makeButton('Cancel');
+        $password_label     = makeLabel('password', 'Password');
+        $password_explain   = makeDescription('Enter if changed');
+        $submit_button      = makeSubmit('Submit', 'btn-blue btn-spaced');
+        $cancel_button      = makeButton('Cancel', 'btn-blue btn-spaced');
         $user_edit_form     = array();
-        $user               = $this->users->get_array($username);
         
         /* Set up the view template parameters */
         $user_edit_form['username']         = $username;
-        $user_edit_form['username_input']   = makeLabel('username', 'Username: ' . $username);
-        $user_edit_form['password_input']   = '';
+        $user_edit_form['username_input']   = '';
+        $user_edit_form['password_input']   = makeTextField($password_label, 'password', 'Password', '', 40, 40, $password_explain);
         $user_edit_form['roles_input']      = makeComboField($roles_label, 'role', $this->roles->getAll_array(), 25);
         $user_edit_form['firstname_input']  = makeTextField($firstname_label, 'firstname', 'text', $user['firstname'], 40);
         $user_edit_form['lastname_input']   = makeTextField($lastname_label, 'lastname', 'text', $user['lastname'], 40);
         $user_edit_form['email_input']      = makeTextField($email_label, 'email', 'text', $user['email'], 40);
-        $user_edit_form['actions']          = $submit_button . $cancel_button;
-        
+        $user_edit_form['actions']          = makeParagraph($submit_button . $cancel_button);
 
         $this->data['title'] = "Edit User: $username";
         $this->data['user_mtce_content'] = $this->parser->parse('_user_edit', $user_edit_form, true);
@@ -105,7 +106,10 @@ class UserMtce extends Application
             $this->users->add($user);
         }
         else
+        {
+            $user['username'] = $username; // Just in case someone decided to do some JavaScript injection
             $this->users->update($user);
+        }
 
         // redisplay the list of users
         redirect('usermtce');
