@@ -38,7 +38,7 @@ INSERT INTO `site_user`(`username`, `password`, `firstname`, `lastname`, `email`
 CREATE TABLE IF NOT EXISTS `tag`
 (
     `tagid` INT(11) NOT NULL,
-    `name`  VARCHAR(10),
+    `name`  VARCHAR(40),
     `postid` INT(11),
     PRIMARY KEY (`tagid`),
     CONSTRAINT fk_postid FOREIGN KEY (`postid`) REFERENCES post(`postid`)
