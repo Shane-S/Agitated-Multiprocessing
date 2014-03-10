@@ -17,20 +17,35 @@ class Caboose {
     var $CI; // handle to CodeIgniter instance
     // define the components
     var $components = array(
-        'date' => array(
+        'bootstrap_date' => array(
             'css' => 'datepicker.css',
             'js' => 'bootstrap-datepicker.js',
             'template' => 'date'
         ),
-        'time' => array(
+        'bootstrap_time' => array(
             'css' => 'bootstrap-timepicker.css',
             'js' => 'bootstrap-timepicker.js',
             'template' => 'time'
         ),
-        'editor' => array(
+        'kube_date' => array(
+            'css' => 'kube.datepicker.css',
+            'js' => 'kube.datepicker.min.js',
+            'template' => 'kube_date'
+        ),
+        'tinyeditor' => array(
             'css' => array('tinyeditor.css', 'undestroy.css'),
             'js' => 'tiny.editor.packed.js',
-            'template' => 'editor'
+            'template' => 'tiny_editor'
+        ),
+        'elRTE' => array(
+           'css' => array('elRTE/elrte-inner.css', 'elRTE/elrte.min.css', 'elRTE/smoothness/jquery-ui-1.8.13.custom.css'),
+           'js' => array('elRTE/elrte.min.js', 'elRTE/jquery-ui-1.8.13.custom.min.js'),
+           'template' => 'el_editor'
+        ),
+        'elFinder' => array(
+            'css' => array('elFinder/elfinder.min.css', 'theme.css'),
+            'js' => 'elFinder/elfinder.min.js',
+            'template' => 'el_finder'
         ),
         'lightbox' => array(
             'css' => 'jquery.lightbox-0.5.css',
@@ -41,11 +56,6 @@ class Caboose {
             'css' => 'nod.css',
             'js' => 'nod.js',
             'template' => 'nod'
-        ),
-        'awesome' => array(
-            'css' => 'font-awesome.min.css',
-            'js' => '',
-            'template' => ''
         ),
         'smover' => array(
             'css' => 'smover.css',
@@ -169,8 +179,7 @@ class Caboose {
      */
     function bind($field, $template) {
         $parms = array('field' => $field);
-        $CI = &get_instance(); // handle to CodeIgniter instance
-        $result = $CI->parser->parse('_components/' . $template, $parms, true);
+        $result = $this->CI->parser->parse('_components/' . $template, $parms, true);
         return $result;
     }
 
@@ -190,6 +199,6 @@ class Caboose {
         return $this->result;
     }
 }
-
+    
 /* End of file bs_form.php */
 /* Location: ./application/libraries/bs_form.php */

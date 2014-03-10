@@ -22,8 +22,12 @@ class Postmtce extends Application
     function edit($postid)
     {
         $post = $this->posts->get_array($postid);
-        $post_title = $post['title'];
-        $this->data['title'] = "Edit Post: $post_title"; 
+        $post['text_editor']    = makeTextEditor(makeLabel('post_content', 'Body'), 'post_content', $post['post_content'], '10em');
+        $post['date_picker']    = makeDateSelector(makeLabel('created_at', 'Creation Date:'), 'created_at', 
+                                                              date_create_from_format('Y-m-d H:i:s', $post['created_at'])->format('Y-m-d'));
+        $post['post_title']     = makeTextfield(makeLabel('post_title', 'Title:'), 'post_title', 'text', $post['title'], 40);
+        $post['slug']           = makeTextfield(makeLabel('slug', 'Slug:'), 'slug', 'text', $post['slug'], 40, 150);
+        $this->data['title'] = 'Edit Post: ' . $post['title']; 
         $this->data['post_mtce_content'] = $this->parser->parse('_post_edit_single', $post, true);
         $this->data['pagebody'] = 'postMtceView';
         $this->render();
@@ -32,8 +36,11 @@ class Postmtce extends Application
     function add()
     {
         $post = array('postid' => 'new',
-                        'title' => '',
-                        'post_content' => '');
+                        'post_title' => makeTextField(makeLabel('post_title', 'Title:'), 'post_title', 'text', '', 40),
+                        'post_content' => '',
+                        'slug' => makeTextField(makeLabel('slug', 'Slug:'), 'slug', 'text', '', 40, 150),
+                        'text_editor' => makeTextEditor(makeLabel('post_content', 'Post body'), 'post_content', '', '10em'));
+        $post['date_picker'] = makeDateSelector(makeLabel('created_at', 'Post creation date:'), 'created_at', '');
         $this->data['title'] = "New Post";
         $this->data['post_mtce_content'] = $this->parser->parse('_post_edit_single', $post, true);
         $this->data['pagebody'] = 'postMtceView';
@@ -55,18 +62,31 @@ class Postmtce extends Application
             $post = $this->posts->get($postid);
 
         // over-ride the user record fields with submitted values
-        $post->title = $_POST['title'];
+        $post->title = $_POST['post_title'];
         $post->post_content = $_POST['post_content'];
 
         // Set the last modified time and the user who did the modification
-        $post->updated_at = date('Y-m-d H:i:s');
+ 
         $post->modified_by = $this->session->userdata('username');
+        $post->slug = $_POST['slug'];
+        $input_date = date_create_from_format('Y-m-d', $_POST['created_at']);
+        $stored_date = date_create_from_format('Y-m-d H:i:s', $post->created_at)->format('Y-m-d');
 
+        if(empty($_POST['created_at']) || $_POST['created_at'] == $stored_date)
+        {
+            $post->updated_at = date('Y-m-d H:i:s');
+            $post->created_at = ($postid == null || $postid == 'new') ? $post->updated_at : $post->created_at;
+        }
+        else
+        {
+            $post->created_at = $input_date->format('Y-m-d H:i:s');
+            $post->updated_at = $post->created_at;
+        }
+        
         // either add or update the post record, as appropriate
         if ($postid == null || $postid=='new')
         {
             $post->username = $this->session->userdata('username');
-            $post->created_at = $post->updated_at;
             $this->posts->add($post);
         }
         else
