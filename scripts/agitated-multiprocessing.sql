@@ -37,6 +37,19 @@ INSERT INTO `site_user`(`username`, `password`, `firstname`, `lastname`, `email`
 
 
 
+-- Tag table ---------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `tag`
+(
+    `tagid` INT(11) NOT NULL,
+    `name`  VARCHAR(10),
+    `postid` INT(11),
+    PRIMARY KEY (`tagid`),
+    CONSTRAINT fk_postid FOREIGN KEY (`postid`) REFERENCES post(`postid`)
+);
+INSERT INTO `tag`(`tagid`, `name`, `postid`) VALUES
+(1, 'Horse' , 1),
+(2, 'Thingy', 2),
+(3, 'Progressive', 2);
 -- Role table --------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `user_role`
 (
