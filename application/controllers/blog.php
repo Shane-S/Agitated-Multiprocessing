@@ -3,11 +3,12 @@
 class Blog extends Application {
 
     const POST_CUTOFF = 300; // Number of characters before cutting off a post
-
+    
     function __construct() {
         parent::__construct();
         $this->load->model('posts');
         $this->load->model('media');
+        $this->load->model('tags');
     }
 
     /*
@@ -32,8 +33,10 @@ class Blog extends Application {
      */
     function posts($postid)
     {
+        
         $this->data['title'] = 'Blog';
         $this->data['blog_content'] = $this->_build_singlepost($postid);
+        
         $this->data['pagebody'] = 'blogView';
         $this->render();
     }
@@ -51,12 +54,13 @@ class Blog extends Application {
     {
         $posts = $this->posts->getAll_array();
         $parsable_posts = array('blog_posts' => &$posts);
-        foreach($posts as &$post)
+        foreach($posts as $post)
         {
             $post['post_content'] = strlen($post['post_content']) > self::POST_CUTOFF ? 
                     array_slice($post['post_content'], 0, self::POST_CUTOFF - 3) . '...' :
                     $post['post_content'];
             $post['thumb'] = $post['thumb'] ? '/data/thumbs/' . $post['thumb'] : '';
+            
         }
         return $this->parser->parse('_all_posts', $parsable_posts, true);
     }
@@ -71,11 +75,34 @@ class Blog extends Application {
      * @return The HTML for displaying a single post.
      */
     function _build_singlepost($postid)
-    {
+    {  
+        $counter = 0;
+        $allposts = count($this->posts->getAll_array());
         $post = $this->posts->get_array($postid);
+        $tags = $this->tags->getAll_array();
+        while ($this->tags->getAll_array() > $counter) {
+            if($tags['postid'] == $postid) {
+                $tags = $this->tags->get_array($tags['postid']);
+            }
+            $counter++;
+        }
         $imgs = $this->media->querySomeMore('thumbnail', $post['thumb']);
         $post['full_size'] = $imgs ? '/data/images/' . $imgs[0]['filename'] : '';
+        if($postid == 1) {
+           $post['previous_button']       = makeLinkButton('Previous', '{previd}', 'Go to previous page', 'btn-blue btn-spaced', TRUE);
+        } else {
+            $post['previous_button']       = makeLinkButton('Previous', '{previd}', 'Go to previous page', 'btn-blue btn-spaced', FALSE);
+        }
+        if($allposts > $postid) {
+            $post['next_button']           = makeLinkButton('Next', '{nextid}', 'Go to next page','btn-blue btn-spaced', FALSE);
+        } else {
+            $post['next_button']           = makeLinkButton('Next', '{nextid}', 'Go to next page','btn-blue btn-spaced', TRUE);
+        }
+        $post['previd'] = $postid - 1;
+        $post['nextid'] = $postid + 1;
         
-        return $this->parser->parse('_single_post', $post, true);
+        return $this->parser->parse('_single_post', $post, true) && $this->parser->parse('_single_post', $tags, true);
     }
+    
+    
 }

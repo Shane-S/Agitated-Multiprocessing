@@ -248,15 +248,20 @@ function makeDescription($description, $keep = TRUE)
  * @param string $title "Tooltip" text 
  * @param string $css_extras Extra CSS class information
  */
-function makeLinkButton($label, $href, $title, $css_extras = "", $keep = TRUE) {
+function makeLinkButton($label, $href, $title, $css_extras = "", $disabled = FALSE, $keep = TRUE) {
     $CI = &get_instance();
     $parms = array(
         'label' => $label,
         'href' => $href,
         'title' => $title,
-        'css_extras' => $css_extras
+        'css_extras' => $css_extras,
+        'disabled' => ($disabled ? 'disabled="disabled"' : '')
     );
-    return $CI->parser->parse('_fields/link', $parms, $keep);
+    if($disabled) {
+        
+    } else {
+        return $CI->parser->parse('_fields/link', $parms, $keep);
+    }
 }
 
 /**

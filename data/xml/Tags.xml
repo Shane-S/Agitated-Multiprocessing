@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+<root>
+  <tags>
+    <tag type = "graphics">
+        <post number = "1"></post>
+    </tag>
+    <tag type = "gameplay">
+        <post number = "2"></post>
+    </tag>
+    <tag type = "milestones">
+        <post number = "3"></post>
+    </tag>
+    <tag type = "teamwork">
+        <post number = "4"></post>
+    </tag>
+</tags>  
+</root>

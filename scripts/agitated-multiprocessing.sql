@@ -34,6 +34,19 @@ INSERT INTO `site_user`(`username`, `password`, `firstname`, `lastname`, `email`
 ('konstabro', '9115b9aab6fd005f51e429a39e9e9618', 'Konstantin', 'Boyarinov','kboyarinov@my.bcit.ca', '2014-02-10 08:47:48', 'admin');
 
 
+-- Tag table ---------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `tag`
+(
+    `tagid` INT(11) NOT NULL,
+    `name`  VARCHAR(10),
+    `postid` INT(11),
+    PRIMARY KEY (`tagid`),
+    CONSTRAINT fk_postid FOREIGN KEY (`postid`) REFERENCES post(`postid`)
+);
+INSERT INTO `tag`(`tagid`, `name`, `postid`) VALUES
+(1, 'Horse' , 1),
+(2, 'Thingy', 2),
+(3, 'Progressive', 2);
 -- Role table --------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `user_role`
 (
