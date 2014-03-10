@@ -328,7 +328,7 @@ function makeSubmitButton($label, $title, $css_extras = "", $keep = TRUE) {
  */
 function makeDateSelector($label, $name, $value, $explain = "", $size = 10, $disabled = false, $keep = TRUE) {
     $CI = &get_instance(); // handle to CodeIgniter instance
-    $CI->caboose->needed('date', $name);
+    $CI->caboose->needed('kube_date', $name);
     $parms = array(
         'label' => $label,
         'name' => $name,
@@ -380,23 +380,23 @@ function makeTextArea($label, $name, $value, $explain = "", $maxlen = 40, $size 
  * @param <type> $size (ignored)
  * @param <type> $rows  (ignored)
  */
-function makeTextEditor($label, $name, $value, $explain = "", $maxlen = 40, $size = 25, $rows = 5, $disabled = false, $keep = TRUE) {
+function makeTextEditor($label, $name, $value, $height = '10em', $width='50em', $explain = "", $maxlen = 40, $rows = 5, $cols = 80, $disabled = false, $keep = TRUE) {
     $CI = &get_instance(); // handle to CodeIgniter instance
-    $CI->caboose->needed('editor', $name);
-    $height = (int) (strlen($value) / 80) + 1;
+    $CI->caboose->needed('elRTE', $name);
+    $CI->caboose->needed('elFinder', $name);
     if ($rows < $height)
         $rows = $height;
     $parms = array(
         'label' => $label,
         'name' => $name,
         'value' => htmlentities($value, ENT_COMPAT, 'UTF-8'),
-        'explain' => $explain,
-//        'maxlen' => $maxlen,
-        'size' => $size,
+        'height' => $height,
+        'width' => $width,
         'rows' => $rows,
+        'cols' => $cols,
         'disabled' => ($disabled ? 'disabled="disabled"' : '')
     );
-    return $CI->parser->parse('_fields/textarea', $parms, $keep);
+    return $CI->parser->parse('_fields/texteditor', $parms, $keep);
 }
 
 /**

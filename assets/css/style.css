@@ -261,8 +261,14 @@ p a:hover {
 	background: #5d68bf;
 	padding: 0;
 	width: 70%;
+        margin-left: auto;
+        margin-right: auto;
         min-width: 1020px;
         box-shadow: -0.3125em 0 1.875em #444, 0.3125em 0 1.875em #444;
+}
+
+#body div#section #post_content{
+    font-family:consolas, monospace;
 }
 
 #body div#section form#user-edit {
@@ -276,25 +282,10 @@ p a:hover {
     padding: 0 0 30px 0;
 }
 
-#body div ul {
-	list-style: none;
-	margin: 0 22px;
-	min-height: 400px;
-	padding: 0 0 42px;
-	width: 940px;
+#body div#section .editor:not(.tab){
+    width:70%;
 }
-#body div ul li {
-	display: block;
-	height: 180px;
-	overflow: hidden;
-	padding: 24px 0 0;
-}
-#body div ul li:first-child {
-	padding: 66px 0 0;
-}
-#body div#section ul li:first-child {
-	padding: 36px 0 0;
-}
+
 #body div ul li a img {
 	border: none;
 	display: block;
@@ -306,30 +297,8 @@ p a:hover {
 	filter: alpha(opacity=90);/* Needed for IE8 and old versions */
 	opacity: 0.9;
 }
-#body div ul li div {
-	float: right;
-	padding: 0;
-	width: 592px;
-}
 
-#body div#section ul li div p {
-	color: #eeb58c;
-	line-height: 30px;
-	margin: 0;
-	padding: 0 0 0;
-	text-align: justify;
-}
-#body div ul li div p {
-	color: #000;
-	line-height: 30px;
-	margin: 0;
-	padding: 0 0 30px;
-	text-align: justify;
-}
-#body div ul li div p a {
-	color: #EEB58C;
-}
-#body div ul li div a.readmore {
+#body div a.readmore {
 	color: #585758;
 	display: inline-block;
 	font-size: 12px;
@@ -337,17 +306,13 @@ p a:hover {
 	line-height: 22px;
 	text-decoration: none;
 }
-#body div ul li div a.readmore:hover {
+#body div a.readmore:hover {
 	color: #b4b3b4;
 }
 #footer ul li a:hover {
 	color: #b6834f;
 }
-#body div {
-	margin: 0 auto;
-	padding: 40px 0 80px;
-	width: 940px;
-}
+
 #body div div.blog {
 	color: #585758;
 	font-size: 12px;
