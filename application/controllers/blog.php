@@ -80,9 +80,10 @@ class Blog extends Application {
         $allposts = count($this->posts->getAll_array());
         $post = $this->posts->get_array($postid);
         $tags = $this->tags->getAll_array();
-        while ($this->tags->getAll_array() > $counter) {
-            if($tags['postid'] == $postid) {
-                $tags = $this->tags->get_array($tags['postid']);
+        while (count($this->tags->getAll_array()) > $counter) {
+            $tag = $this->posts->get_array($counter);
+            if($tag['postid'] == $postid) {
+                $tags = $this->tags->get_array($tag['postid']);
             }
             $counter++;
         }
@@ -101,7 +102,7 @@ class Blog extends Application {
         $post['previd'] = $postid - 1;
         $post['nextid'] = $postid + 1;
         
-        return $this->parser->parse('_single_post', $post, true) && $this->parser->parse('_single_post', $tags, true);
+        return $this->parser->parse('_single_post', $post, true);
     }
     
     

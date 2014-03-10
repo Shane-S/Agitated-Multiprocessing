@@ -65,25 +65,10 @@ $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
 
 $db['hosted'] = $db['default'];
-$db['hosted']['hostname'] = 'localhost';
 $db['hosted']['username'] = 'bcitx762_o03';
 $db['hosted']['password'] = '.L[wF;$#9rAw';
 $db['hosted']['database'] = 'bcitx762_o03';
 
- echo '<pre>';
-  print_r($db['default']);
-  echo '</pre>';
 
-  echo 'Connecting to database: ' .$db['default']['database'];
-  $dbh=mysql_connect
-  (
-    $db['hosted']['hostname'],
-    $db['hosted']['username'],
-    $db['hosted']['password'])
-    or die('Cannot connect to the database because: ' . mysql_error());
-    mysql_select_db ($db['hosted']['database']);
-
-    echo '<br />   Connected OK:'  ;
-    die( 'file: ' .__FILE__ . ' Line: ' .__LINE__); 
 /* End of file database.php */
 /* Location: ./application/config/database.php */
