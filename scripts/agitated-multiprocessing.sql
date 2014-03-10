@@ -31,7 +31,10 @@ CREATE TABLE IF NOT EXISTS `site_user`
 
 INSERT INTO `site_user`(`username`, `password`, `firstname`, `lastname`, `email`, `created_at`, `role`) VALUES
 ('PrecisionConage', '7790ffbb26cf6409e707105e92cde91e', 'Shane', 'Spoor', 'sspoor@my.bcit.ca', '2014-02-10 08:46:37', 'admin'),
-('konstabro', '9115b9aab6fd005f51e429a39e9e9618', 'Konstantin', 'Boyarinov','kboyarinov@my.bcit.ca', '2014-02-10 08:47:48', 'admin');
+('konstabro', '9115b9aab6fd005f51e429a39e9e9618', 'Konstantin', 'Boyarinov','kboyarinov@my.bcit.ca', '2014-02-10 08:47:48', 'admin'),
+('JParry', '5df7bff58c7211580f99aee9738e0eea', 'Jim', 'Parry','jparry1@bcit.ca', '2014-02-10 08:47:48', 'admin'),
+('JimP', 'abd2a9d59bcffefef56dbbd853a0da01', 'Jim', 'Parry', 'jparry1@bcit.ca', '2014-02-10 08:47:48', 'user');
+
 
 
 -- Tag table ---------------------------------------------------------------------------
