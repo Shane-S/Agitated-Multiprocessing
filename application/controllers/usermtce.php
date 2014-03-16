@@ -2,6 +2,14 @@
 
 class UserMtce extends Application
 {
+    const VALID_INPUT       = 0;
+    const EMPTY_FIELD       = 1;
+    const ALREADY_IN_USE    = 2;
+    const BAD_EXTENSION     = 3;
+
+    /**
+     * Loads the necessary database models to accommodate user maintenance.
+     */
     function __construct()
     {
         parent::__construct();
@@ -10,6 +18,9 @@ class UserMtce extends Application
         $this->load->model('roles');
     }
     
+    /**
+     * Populates the default view of the user edit page.
+     */
     function index()
     {
         $all_users = array();
@@ -20,51 +31,55 @@ class UserMtce extends Application
         $this->render();
     }
     
+    /**
+     * Edit the user with the specified username.
+     * 
+     * @param type $username The username of the user to edit.
+     */
     function edit($username)
     {
-        $user               = $this->users->get_array($username);
+        $this->edit_user($username);
+    }
+
+    /**
+     * Add a new user.
+     */    
+    function add()
+    {
+        $this->edit_user(null);
+    }
+    
+    /**
+     * Sets up the view with the relevant information. 
+     * 
+     * This is the private backend to the edit and add functions; they do pretty
+     * much exactly the same thing, so they can be handled by one function.
+     * 
+     * @param string $username Name of the user to edit (null if creating a user).
+     */
+    private function edit_user($username = null)
+    {
         $roles_label        = makeLabel('roles', 'Roles');
         $firstname_label    = makeLabel('firstname', 'First Name');
         $lastname_label     = makeLabel('lasname', 'Last Name');
+        $username_label     = makeLabel('username', 'Username');
         $email_label        = makeLabel('email', 'Email');
         $password_label     = makeLabel('password', 'Password');
         $password_explain   = makeDescription('Enter if changed');
         $submit_button      = makeSubmit('Submit', 'btn-blue btn-spaced');
         $cancel_button      = makeButton('Cancel', 'btn-blue btn-spaced');
-        $user_edit_form     = array();
-        
-        /* Set up the view template parameters */
-        $user_edit_form['username']         = $username;
-        $user_edit_form['username_input']   = '';
-        $user_edit_form['password_input']   = makeTextField($password_label, 'password', 'Password', '', 40, 40, $password_explain);
-        $user_edit_form['roles_input']      = makeComboField($roles_label, 'role', $this->roles->getAll_array(), 25);
-        $user_edit_form['firstname_input']  = makeTextField($firstname_label, 'firstname', 'text', $user['firstname'], 40);
-        $user_edit_form['lastname_input']   = makeTextField($lastname_label, 'lastname', 'text', $user['lastname'], 40);
-        $user_edit_form['email_input']      = makeTextField($email_label, 'email', 'text', $user['email'], 40);
+                
+        $user_edit_form['username_input']   = $username ? '' : makeTextField($username_label, 'username', 'text', '', 40, 40);
+        $user_edit_form['password_input']   = makeTextField($password_label, 'password', 'text', '', 40, 40, $password_explain);
+        $user_edit_form['roles_input']      = makeComboField($roles_label, 'role', $this->_build_roles(), 25);
+        $user_edit_form['firstname_input']  = makeTextField($firstname_label, 'firstname', 'text', '', 40);
+        $user_edit_form['lastname_input']   = makeTextField($lastname_label, 'lastname', 'text', '', 40);
+        $user_edit_form['email_input']      = makeTextField($email_label, 'email', 'text', '', 40);
         $user_edit_form['actions']          = makeParagraph($submit_button . $cancel_button);
-
-        $this->data['title'] = "Edit User: $username";
+        
+        $this->data['title'] = $username ? "Edit User: $username" : "Add User";
+        $this->data['username'] = $username? $username : 'new';
         $this->data['user_mtce_content'] = $this->parser->parse('_user_edit', $user_edit_form, true);
-        $this->data['pagebody'] = 'userMtceView';
-        $this->data['username'] = $username;
-        $this->render();
-    }
-
-    
-    
-    function add()
-    {
-        $roles = array();
-        $user = array('username' => '',
-                        'firstname' => '',
-                        'lastname' => '',
-                        'email' => '',
-                        'created_at'=>'',
-                        'password' => '',
-                        'roles' => $this->roles->getAll_array());
-        $this->data['title'] = "Add User";
-        $this->data['id'] = 'new';
-        $this->data['user_mtce_content'] = $this->parser->parse('_user_edit', $user, true);
         $this->data['pagebody'] = 'userMtceView';
         $this->render();
     }
@@ -88,6 +103,7 @@ class UserMtce extends Application
 
         // over-ride the user record fields with submitted values
         fieldExtract($_POST, $user, $user_fields);
+
         // handle the password specially, as it needs to be encrypted
         $new_password = $_POST['password'];
         if (!empty($new_password)) {
@@ -115,10 +131,35 @@ class UserMtce extends Application
         redirect('usermtce');
     }
 
-     // Delete a user
-    function delete($id)
+    function validate($what, $value, $echo = true)
     {
-        $this->users->delete($id);
+        if(!$value)
+            return false;
+        
+        else if($this->users->countWhich($what, $value) > 0)
+            echo false;
+        else
+            echo true;
+    }
+    
+    /**
+     * Gets a list of roles available to users and to populate the combo box.
+     * 
+     * @return array Array of all user roles.
+     */
+    private function _build_roles()
+    {
+        $role_options       = array();
+        foreach($this->roles->getAll_array() as $role_arr)
+            $role_options[] = array('option' => $role_arr['role']);
+        
+        return $role_options;
+    }
+    
+     // Delete a user
+    function delete($username)
+    {
+        $this->users->delete($username);
         redirect('usermtce');
     }
 }
