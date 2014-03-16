@@ -11,6 +11,7 @@ class Postmtce extends Application
         $this->restrict(array(ROLE_ADMIN));
         $this->load->model('posts');
         $this->load->model('media');
+        $this->load->library('xmlrpc');
     }
     
     /**
@@ -138,6 +139,7 @@ class Postmtce extends Application
         {
             $post->username = $this->session->userdata('username');
             $this->posts->add($post);
+            $this->syndicate_post($post);
         }
         else
             $this->posts->update($post);
@@ -155,5 +157,25 @@ class Postmtce extends Application
     {
         $this->posts->delete($postid);
         redirect('/postmtce');
+    }
+    
+    /**
+     * Sends a new post to the syndication server.
+     * 
+     * @param object $post The post to be sent.
+     */
+    function syndicate_post($post)
+    {
+        $this->xmlrpc->server('http://showcase.bcitxml.com/capo', 80);
+        $this->xmlrpc->method('newpost');
+        $request = array(
+                            array('o03', 'string'), // Need to load this from somewhere
+                            array($post->postid, 'int'),
+                            array(date('Y-m-d-H-i', strtotime($post->created_at)), 'string'),
+                            array($_SERVER['SERVER_NAME'] . '/blog/posts/' . $post->id, 'string'),
+                            array($post->title, 'string'),
+                            array($post->slug, 'string')
+                        );
+        $this->xmlrpc->request($request);
     }
 }

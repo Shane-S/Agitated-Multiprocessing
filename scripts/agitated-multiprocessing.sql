@@ -109,3 +109,17 @@ CREATE TABLE IF NOT EXISTS  `ci_sessions` (
 	PRIMARY KEY (session_id),
 	KEY `last_activity_idx` (`last_activity`)
 );
+
+-- metdata table ------------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `metadata`
+(
+  `property`    VARCHAR(32) NOT NULL,
+  `value`    	VARCHAR(512) NOT NULL,
+  `description` VARCHAR(256),
+  PRIMARY KEY (`property`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+INSERT INTO `metadata`(`property`, `value`, `description`) VALUES
+('syndication_code', 'o03', 'Identifies this blog uniquely for post syndication.'),
+('site_plug', '[Forthcoming - like our game]', 'Brief description to interest readers.'),
+('site_name', 'Agitated Multiprocessing', '');
