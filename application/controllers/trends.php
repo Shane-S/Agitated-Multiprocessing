@@ -8,18 +8,20 @@ class Trends extends Application {
         parent::__construct();
         $this->load->model('game_sales');
         $this->report = '';
+        $this->doc = new DOMDocument();
+        $this->doc->load(XML_FOLDER . 'trends.xml');
     }
     
     function index()
     {
+        $element = $this->doc->documentElement;
         $this->report .= $this->_build_report_headings();
         $this->report .= $this->_build_report_body();
-        $this->load->helper('validation');
 
         $this->data['pagebody'] = "trendsView";
         $this->data['title'] = "Trends";
         $this->data['trends_xml'] = $this->report;
-        $this->data['results'] = validate_dtd(XML_FOLDER . 'game_sales.xml');
+        $this->data['trends_results'] = $this->doc->schemaValidate(XML_FOLDER . 'game_sales.xsd') ? 'Ok!' : 'Oops!';
         $this->render();
     }
     

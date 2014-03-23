@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<xs:schema version="1.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+    
+    <!--
+        The game_sales element is the root element. It contains the sales data
+        for different game genres over a range of years and platforms. For example,
+        a (simple) valid document could have the following:
+        <game_sales>
+            <sales year="1999">
+                <platform type = "console">
+                    <sale><genre>Action</genre><percentage>19.9</percentage></sale>
+                </platform>
+            </sales>
+        </game_sales>
+    -->
+    <xs:element name="game_sales">
+        <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="sales" minOccurs="1" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!--
+        The sales element holds the sales for different platforms in a given year.
+        It can hold the data for any number of platforms, but it cannot hold any
+        other type of element. 
+
+        Additionally, the sales year must start above 1947, since that is the
+        (apparent) year of release of the very first video game. This wouldn't
+        make for an interesting data set, however, so it's recommended to start
+        from at least 1960 (games were still sparse, but there was at least
+        something to work with).
+    -->
+    <xs:element name="sales">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="platform" minOccurs="1" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="year" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:integer">
+                        <xs:minInclusive value="1947"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <!--
+        The platform element contains sales for a given platform in a given year.
+        It must have a type attribute specifying the type of platform it identifies.
+        For example, a platform could have type "console" (<platform type="console"),
+        meaning that this particular platform element contains for consoles from
+        that year.
+    -->
+    <xs:element name="platform">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="sale" minOccurs="1" maxOccurs="unbounded" />
+            </xs:sequence>
+            <xs:attribute name="type" type="xs:string" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
+    <!--
+        The sale element holds the <percentage>market share for a game <genre>
+        in a given year on a given platform. For example, it a sale element might
+        look like <sale><genre>Action</genre><percentage>20.0</percentage></sale>.
+        Each <sale> holds data for only a single genre.
+    -->
+    <xs:element name="sale">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="genre" minOccurs="1" maxOccurs="1" />
+                <xs:element ref="percentage" minOccurs="1" maxOccurs="1" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- 
+        The genre element holds the genre of the game to which a <percentage>
+        in the same <sale> element corresponds. The element may hold strings
+        with an optional hyphen separating the words (e.g. <genre>Role-Playing</genre>).
+    -->
+    <xs:element name="genre">
+    <xs:simpleType>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[a-zA-Z]+([-][a-zA-Z]+)*"/>
+        </xs:restriction>
+    </xs:simpleType>
+    </xs:element>
+    
+    <!--
+        The percentage element lists the market share of a given <genre> for a
+        a particular year. The percentage is a decimal number between 0 and 100
+        (it's a percentage, after all). For example, <percentage>19.0</percentage>
+        is a valid percentage.
+    -->
+    <xs:element name="percentage">
+    <xs:simpleType>
+        <xs:restriction base="xs:decimal">
+            <xs:minInclusive value="0.0"/>
+            <xs:maxInclusive value="100.0"/>
+        </xs:restriction>
+    </xs:simpleType>
+    </xs:element>
+    
+    
+</xs:schema>

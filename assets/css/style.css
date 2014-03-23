@@ -176,7 +176,7 @@ img {
 	text-align: justify;
 }
 
-#body #trends_XML{
+#body #section #trends_XML{
         color: #000;
         background-color: #fff;
         margin-right: auto;
@@ -184,7 +184,7 @@ img {
         font-family: Cambria, "Times New Roman", serif;
         font-size: 1.1em;
 }
-
+/*
 #body #trends_XML td.opening {
     border-bottom: 2px solid black;
     padding-top:20px;
@@ -203,7 +203,7 @@ img {
 
 #body #trends_XML td.cum_avg {
    padding: 20px 0px 0px 0px;
-}
+}*/
 
 #body pre {
         font-size: 80%;

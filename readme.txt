@@ -1,27 +1,19 @@
-The server works correctly. The client is written, but does not properly post due to database errors.
-For the server:
-*   We adapted the capo controller from the example to populate our responses
-    for info, posts, post(id) and latest RPC methods
-*   We made a new database table, metadata, to hold the site name, syndication
-    code, and plug for our site
-    []  We can also use this later for other site metadata (keywords, for example)
-*   We use the $_SERVER superglobal to get the URL
-    for the site, which should make it independent of hosting environments
-*   We've added a new page restricted to admins, sitemtce, that allows the admin
-    to change the syndication code, the site name, and the site plug
+All portions of this lab are done:
+*   The schema is complete and valid
 
-For the client:
-*   When a new post is added, we call the "syndicate_post" method to send it to
-    the server
-*   When the site information is changed, we call the "update_remote_info" method
-    to send it to the server
+*   The XML is constrained to certain values
+    []  The genre element may only have words (upper or lower case characters)
+        optionally separated by a hyphen, which uses a pattern
+    []  The year must start at 1947 (the year the first "video game" was released)
+    []  Only decimal values are allowed for the percentages
 
-For the next labs:
-*   We are still redesigning the site. There are some bugs to be fixed still, and
-    Kube reworked their framework, so we plan to integrate their changes.
+*   There are a number of simple types
+    []  genre elements consist of constrained strings
+    []  percentages are decimal values
+    []  all attributes are simple types
 
-NOTE: The site currently has a login bug. It is still possible to log in, but the
-      browser is not properly redirected. Simply enter the URL for the homepage
-      manually after submitting the login information.
-      
-      
+*   There are also some complex types
+    []  Every element with attributes (platform, sales)
+    []  Elements with child elements (sale, game_sales)
+
+*   The schema is fully commented with small examples to clarify the explanations 
