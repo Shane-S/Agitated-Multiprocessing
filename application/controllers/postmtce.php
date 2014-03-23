@@ -11,6 +11,7 @@ class Postmtce extends Application
         $this->restrict(array(ROLE_ADMIN));
         $this->load->model('posts');
         $this->load->model('media');
+        $this->load->model('metadata');
         $this->load->library('xmlrpc');
     }
     
@@ -166,10 +167,10 @@ class Postmtce extends Application
      */
     function syndicate_post($post)
     {
-        $this->xmlrpc->server('http://showcase.bcitxml.com/capo', 80);
+        $this->xmlrpc->server('http://showcase.bcitxml.com/boss', 80);
         $this->xmlrpc->method('newpost');
         $request = array(
-                            array('o03', 'string'), // Need to load this from somewhere
+                            array($this->metadata->get('syndication_code')->value, 'string'),
                             array($post->postid, 'int'),
                             array(date('Y-m-d-H-i', strtotime($post->created_at)), 'string'),
                             array($_SERVER['SERVER_NAME'] . '/blog/posts/' . $post->id, 'string'),
@@ -177,5 +178,6 @@ class Postmtce extends Application
                             array($post->slug, 'string')
                         );
         $this->xmlrpc->request($request);
+        $this->xmlrcp->send_request($request);
     }
 }
