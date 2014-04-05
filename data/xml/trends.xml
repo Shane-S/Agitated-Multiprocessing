@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type='text/xsl' href='trends.xsl'?>
+
 <game_sales xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xsi:noNamespaceSchemaLocation="game_sales.xsd">
+            xsi:noNamespaceSchemaLocation="trends.xsd">
 	<sales year="2007">
             <platform type="console">
                 <sale>
