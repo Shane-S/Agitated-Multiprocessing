@@ -68,7 +68,8 @@ class UserMtce extends Application
         $password_explain   = makeDescription('Enter if changed');
         $submit_button      = makeSubmit('Submit', 'btn-blue btn-spaced');
         $cancel_button      = makeButton('Cancel', 'btn-blue btn-spaced');
-                
+        
+        $user_edit_form['username']         = $username? $username : 'new';
         $user_edit_form['username_input']   = $username ? '' : makeTextField($username_label, 'username', 'text', '', 40, 40);
         $user_edit_form['password_input']   = makeTextField($password_label, 'password', 'text', '', 40, 40, $password_explain);
         $user_edit_form['roles_input']      = makeComboField($roles_label, 'role', $this->_build_roles(), 25);
@@ -78,7 +79,6 @@ class UserMtce extends Application
         $user_edit_form['actions']          = makeParagraph($submit_button . $cancel_button);
         
         $this->data['title'] = $username ? "Edit User: $username" : "Add User";
-        $this->data['username'] = $username? $username : 'new';
         $this->data['user_mtce_content'] = $this->parser->parse('_user_edit', $user_edit_form, true);
         $this->data['pagebody'] = 'userMtceView';
         $this->render();
@@ -128,7 +128,7 @@ class UserMtce extends Application
         }
 
         // redisplay the list of users
-        redirect('usermtce');
+        redirect('/usermtce');
     }
 
     function validate($what, $value, $echo = true)

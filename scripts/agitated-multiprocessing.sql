@@ -123,3 +123,26 @@ INSERT INTO `metadata`(`property`, `value`, `description`) VALUES
 ('syndication_code', 'o03', 'Identifies this blog uniquely for post syndication.'),
 ('site_plug', '[Forthcoming - like our game]', 'Brief description to interest readers.'),
 ('site_name', 'Agitated Multiprocessing', '');
+
+
+CREATE TABLE IF NOT EXISTS `tag`
+(
+    `tag_id`        INT(11)     AUTO_INCREMENT NOT NULL,
+    `tag_name`      VARCHAR(64)                NOT NULL,
+    `postid`        INT(11)                    NOT NULL,
+    CONSTRAINT PRIMARY KEY pk_tag(`tag_id`),
+    CONSTRAINT fk_post FOREIGN KEY(`postid`) REFERENCES post(`postid`)
+)ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `comment`
+(
+    `comment_id`      INT(11)     AUTO_INCREMENT NOT NULL,
+    `comment_content` TEXT                       NOT NULL,
+    `postid`          INT(11)                    NOT NULL,
+    `username`        VARCHAR(40)                NOT NULL,
+    CONSTRAINT PRIMARY KEY pk_comment(`comment_id`),
+    CONSTRAINT fk_post FOREIGN KEY(`postid`) REFERENCES post(`postid`),
+    CONSTRAINT fk_user FOREIGN KEY(`username`) REFERENCES site_user(`username`)
+)ENGINE=MyISAM DEFAULT CHARSET=utf8;
+

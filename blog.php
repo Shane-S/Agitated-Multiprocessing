@@ -7,9 +7,9 @@ class Blog extends Application {
     function __construct() {
         parent::__construct();
         $this->load->model('posts');
+        $this->load->model('pages');
         $this->load->model('media');
-        $this->load->model('comment');
-        //$this->load->model('tags');
+        $this->load->model('tags');
     }
 
     /*
@@ -53,14 +53,16 @@ class Blog extends Application {
      */
     function _build_allposts()
     {
-        $allposts_count = count($this->posts->getAll_array());
-        $posts = $this->posts->recent($allposts_count);
-        foreach($posts as &$post)
+        $posts = $this->posts->getAll_array();
+        $parsable_posts = array('blog_posts' => &$posts);
+        foreach($posts as $post)
         {
-            $post['post_content'] = $post['slug'];
-            $post['thumb'] = (($post['thumb']) ? '/data/thumbs/' . $post['thumb'] : '');
+            $post['post_content'] = strlen($post['post_content']) > self::POST_CUTOFF ? 
+                    str_split($post['post_content'], self::POST_CUTOFF - 3) . '...' :
+                    $post['post_content'];
+            $post['thumb'] = $post['thumb'] ? '/data/thumbs/' . $post['thumb'] : '';
+            
         }
-        $parsable_posts = array('blog_posts' => $posts);
         return $this->parser->parse('_all_posts', $parsable_posts, true);
     }
     
@@ -78,14 +80,14 @@ class Blog extends Application {
         $counter = 0;
         $allposts = count($this->posts->getAll_array());
         $post = $this->posts->get_array($postid);
-        //$tags = $this->tags->getAll_array();
-        //while (count($this->tags->getAll_array()) > $counter) {
-        //    $tag = $this->posts->get_array($counter);
-        //    if($tag['postid'] == $postid) {
-        //        $tags = $this->tags->get_array($tag['postid']);
-        //    }
-        //    $counter++;
-        //}
+        $tags = $this->tags->getAll_array();
+        while (count($this->tags->getAll_array()) > $counter) {
+            $tag = $this->posts->get_array($counter);
+            if($tag['postid'] == $postid) {
+                $tags = $this->tags->get_array($tag['postid']);
+            }
+            $counter++;
+        }
         $imgs = $this->media->querySomeMore('thumbnail', $post['thumb']);
         $post['full_size'] = $imgs ? '/data/images/' . $imgs[0]['filename'] : '';
         if($postid == 1) {
@@ -101,36 +103,58 @@ class Blog extends Application {
         $post['previd'] = $postid - 1;
         $post['nextid'] = $postid + 1;
         
-        $comment_list = $this->_build_comments($postid);
-        
-        $post['comments'] = empty($comment_list) ? makeParagraph('No comments for this post yet.') : $comment_list;
-        $post['comment_form'] = '';
-
-        if($this->session->userdata('user_role') != ROLE_GUEST)
-            $post['comment_form'] = $this->parser->parse('_comment_form', array('postid' => $postid), true);
-
         return $this->parser->parse('_single_post', $post, true);
     }
     
-    /**
-     * Looks up comments (if any) for this post and creates the HTML for them.
-     * 
-     * If the post has no associated comments, then returns the empty string.
-     * 
-     * @param int $postid The postid for which to look up comments.
-     * @return string The HTML generated for the list of comments.
-     */
-    function _build_comments($postid)
+    function pages($pageid)
     {
-        $comment_array = $this->comment->querySomeMore('postid', $postid); // get array of comments
-        $comments = '';
-
-        if(empty($comment_array))
-                return '';
-
-        foreach($comment_array as $comment)
-            $comments .= $this->parser->parse('_comment', $comment, true);
         
-        return $comments;
+        $recent_posts = $this->_build_3_posts($pageid);
+        $current_page = $this->getCurrentPage($pageid);
+        $this->data['title']        = 'Home';
+        $this->data['recent_posts'] = $recent_posts;
+        $this->data['current_page'] = $current_page;
+        
+        $this->data['pagebody'] = 'homeView';
+        $this->render();
+    }
+    
+ 
+    /*
+     * Builds the HTML for a list of the last 3 most recent posts.
+     * 
+     * The function sorts the post array by creation time, then limits the post 
+     * count to the last 3 posts. It builds an array with their information,
+     * which the template parser processes into HTML.
+     * 
+     * @return The HTML for displaying the three most recently created posts.
+     */
+    function _build_3_posts($pageid)
+    {
+        $recent_posts = $this->pages->nextThreePosts($pageid);
+        
+        foreach($recent_posts as &$recent_post)
+            $recent_post['thumb'] = $recent_post['thumb'] ? '/data/thumbs/' . $recent_post['thumb'] : '';
+        
+        $parsable_recent['blog_posts'] = $recent_posts;
+        return $this->parser->parse('_all_posts', $parsable_recent, true);
+    }
+
+    function getCurrentPage($pageid) {
+        $allpages = (count($this->posts->getAll_array())) / 3;
+        $page = $this->pages->get_array($pageid);
+        if($pageid == 0) {
+           $page['previous_button']       = makeLinkButton('Previous', '{previd}', 'Go to previous page', 'btn-blue btn-spaced', TRUE);
+        } else {
+            $page['previous_button']       = makeLinkButton('Previous', '{previd}', 'Go to previous page', 'btn-blue btn-spaced', FALSE);
+        }
+        if($allpages > $pageid) {
+            $page['next_button']           = makeLinkButton('Next', '{nextid}', 'Go to next page','btn-blue btn-spaced', FALSE);
+        } else {
+            $page['next_button']           = makeLinkButton('Next', '{nextid}', 'Go to next page','btn-blue btn-spaced', TRUE);
+        }
+        $page['previd'] = $pageid - 1;
+        $page['nextid'] = $pageid + 1;
+        return $this->parser->parse('_single_page', $page, true);
     }
 }

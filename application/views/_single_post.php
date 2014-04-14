@@ -9,6 +9,7 @@
     <p>{tags}</p>
     <h1>Comments</h1>
     <div>{comments}</div>
+     {comment_form}
      {previous_button}
      {next_button}
      

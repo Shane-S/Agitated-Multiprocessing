@@ -8,7 +8,7 @@ class Posts extends _Mymodel
         $this->setTable('post', 'postid');
     }
     
-    function recent()
+    function recent($number = 3)
     {
         $parsable_recent = array();
         $posts = $this->posts->getAll_array();
@@ -18,7 +18,7 @@ class Posts extends _Mymodel
             $times[$post['postid']] = strtotime($post['created_at']);
         
         array_multisort($times, SORT_DESC, $posts);
-        $recent_posts   = array_slice($posts, 0, 3);
+        $recent_posts   = array_slice($posts, 0, $number);
         return $recent_posts;
     }
 }

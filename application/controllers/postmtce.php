@@ -8,7 +8,7 @@ class Postmtce extends Application
     function __construct()
     {
         parent::__construct();
-        $this->restrict(array(ROLE_ADMIN));
+        $this->restrict(array(ROLE_ADMIN, ROLE_USER));
         $this->load->model('posts');
         $this->load->model('media');
         $this->load->model('metadata');
@@ -146,7 +146,7 @@ class Postmtce extends Application
             $this->posts->update($post);
 
         // redisplay the list of posts
-        redirect('/home');
+        redirect('/postmtce');
     }
 
     /**
