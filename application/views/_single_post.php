@@ -7,6 +7,8 @@
     <p>Last modified {updated_at}</p>
     <h2>Tags</h2>
     <p>{tags}</p>
+    <h1>Comments</h1>
+    <div>{comments}</div>
      {previous_button}
      {next_button}
      

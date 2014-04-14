@@ -8,6 +8,7 @@ class Blog extends Application {
         parent::__construct();
         $this->load->model('posts');
         $this->load->model('media');
+        $this->load->model('comment');
         //$this->load->model('tags');
     }
 
@@ -102,8 +103,31 @@ class Blog extends Application {
         $post['previd'] = $postid - 1;
         $post['nextid'] = $postid + 1;
         
+        $comment_list = $this->_build_comments($postid);
+        
+        $post['comments'] = empty($comment_list) ? makeParagraph('No comments for this post yet.') : $comment_list;
         return $this->parser->parse('_single_post', $post, true);
     }
     
-    
+    /**
+     * Looks up comments (if any) for this post and creates the HTML for them.
+     * 
+     * If the post has no associated comments, then returns the empty string.
+     * 
+     * @param int $postid The postid for which to look up comments.
+     * @return string The HTML generated for the list of comments.
+     */
+    function _build_comments($postid)
+    {
+        $comment_array = $this->comment->querySomeMore('postid', $postid); // get array of comments
+        $comments = '';
+
+        if(empty($comment_array))
+                return '';
+
+        foreach($comment_array as $comment)
+            $comments .= $this->parser->parse('_comment', $comment, true);
+        
+        return $comments;
+    }
 }
