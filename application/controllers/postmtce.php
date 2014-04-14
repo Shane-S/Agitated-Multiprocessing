@@ -104,7 +104,7 @@ class Postmtce extends Application
             $post->updated_at = $post->created_at;
         }
 
-        if(!empty($_FILES['post_image']) && !file_exists('/data/images' . $_FILES['post_image']['name']))
+        if(!empty($_FILES['post_image']['name']) && !file_exists('/data/images' . $_FILES['post_image']['name']))
         {
             $thumb_marker = '_thumb';
             $dot_idx = strrpos($_FILES['post_image']['name'], '.', -1);
@@ -146,7 +146,7 @@ class Postmtce extends Application
             $this->posts->update($post);
 
         // redisplay the list of posts
-        redirect('/postmtce');
+        redirect('/home');
     }
 
     /**
