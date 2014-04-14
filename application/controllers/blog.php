@@ -8,7 +8,7 @@ class Blog extends Application {
         parent::__construct();
         $this->load->model('posts');
         $this->load->model('media');
-        $this->load->model('tags');
+        //$this->load->model('tags');
     }
 
     /*
@@ -79,14 +79,14 @@ class Blog extends Application {
         $counter = 0;
         $allposts = count($this->posts->getAll_array());
         $post = $this->posts->get_array($postid);
-        $tags = $this->tags->getAll_array();
-        while (count($this->tags->getAll_array()) > $counter) {
-            $tag = $this->posts->get_array($counter);
-            if($tag['postid'] == $postid) {
-                $tags = $this->tags->get_array($tag['postid']);
-            }
-            $counter++;
-        }
+        //$tags = $this->tags->getAll_array();
+        //while (count($this->tags->getAll_array()) > $counter) {
+        //    $tag = $this->posts->get_array($counter);
+        //    if($tag['postid'] == $postid) {
+        //        $tags = $this->tags->get_array($tag['postid']);
+        //    }
+        //    $counter++;
+        //}
         $imgs = $this->media->querySomeMore('thumbnail', $post['thumb']);
         $post['full_size'] = $imgs ? '/data/images/' . $imgs[0]['filename'] : '';
         if($postid == 1) {

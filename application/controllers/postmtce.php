@@ -173,11 +173,11 @@ class Postmtce extends Application
                             array($this->metadata->get('syndication_code')->value, 'string'),
                             array($post->postid, 'int'),
                             array(date('Y-m-d-H-i', strtotime($post->created_at)), 'string'),
-                            array($_SERVER['SERVER_NAME'] . '/blog/posts/' . $post->id, 'string'),
+                            array($_SERVER['SERVER_NAME'] . '/blog/posts/' . $post->postid, 'string'),
                             array($post->title, 'string'),
                             array($post->slug, 'string')
                         );
         $this->xmlrpc->request($request);
-        $this->xmlrcp->send_request($request);
+        $this->xmlrpc->send_request($request);
     }
 }
