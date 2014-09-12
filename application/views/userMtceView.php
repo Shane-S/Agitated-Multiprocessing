@@ -1,4 +1,4 @@
-<div>
-    <h1>User Maintenance</h1>
+<div id="section">
+    <h1 class="mtce-title">{title}</h1>
     {user_mtce_content}
 </div>

@@ -32,7 +32,6 @@ class Login extends Application {
 
             $user = $this->users->get($key);
             if ($user == null) {
-                echo 'No such user<br/>';
                 redirect('/login');
             }
             //check the password
@@ -49,19 +48,26 @@ class Login extends Application {
         }
         else
         {
+            $this->_build_login();
             $this->data['title'] = 'Login';
-            $this->data['pagebody'] = 'loginview';
+            $this->data['pagebody'] = 'loginView';
             $this->render();
         }
+    }
+    
+    function _build_login()
+    {
+        $user_label = makeLabel('username', 'Username');
+        $pass_label = makeLabel('password', 'Password');
+        $this->data['username'] = makeTextField($user_label, 'username', 'text', '', 25);
+        $this->data['password'] = makeTextField($pass_label, 'password', 'password', '', 25);
+        $this->data['submit'] = makeSubmit('Login');
     }
     
     // Process a login
     function submit() {
         $key = $_POST['username'];
         $password = md5($_POST['password']);
-//        echo 'key: '.$key.'<br/>';
-//        echo 'password: '.$password.'<br/>';
-//        exit;
        
        $user = $this->users->get($key);
        

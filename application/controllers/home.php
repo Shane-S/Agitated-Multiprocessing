@@ -39,16 +39,7 @@ class Home extends Application {
      */
     function _build_recent_posts()
     {
-        $parsable_recent = array();
-        $posts = $this->posts->getAll_array();
-        $times = array();
-
-        foreach($posts as $post)
-            $times[$post['postid']] = strtotime($post['created_at']);
-        
-        array_multisort($times, SORT_DESC, $posts);
-        $recent_posts = array_slice($posts, 0, 3);
-
+        $recent_posts = $this->posts->recent();
         foreach($recent_posts as &$recent_post)
             $recent_post['thumb'] = $recent_post['thumb'] ? '/data/thumbs/' . $recent_post['thumb'] : '';
 

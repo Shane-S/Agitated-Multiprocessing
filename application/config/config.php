@@ -9,6 +9,13 @@ $config['menu_choices'] = array(
     'Login' => '/login'
 );
 
+$config['tags'] = array(
+    'Graphics' => '/blog/graphics',
+    'Gameplay' => '/blog/gameplay',
+    'Cooperation' => '/blog/cooperation',
+    
+);
+
 
 
 

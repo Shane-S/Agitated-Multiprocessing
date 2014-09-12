@@ -1,13 +1,18 @@
 /* Website template by freewebsitetemplates.com */
+html {
+    height: 100%;
+}
+
 body {
 	background: #ffffff;
 	color: black;
 	font-family: 'QuestrialRegular';
 	font-size: 16px;
-	margin: 0;
+	margin-left: auto;
+        margin-right: auto;
 	min-width: 910px;
 	padding: 0;
-        
+        height:100%;
 }
 @font-face {
 	font-family: 'QuestrialRegular';
@@ -25,87 +30,127 @@ a {
 img {
 	border: 0;
 }
-#header {
-     background: #fbf804;
-}
-#header div {
-	margin: 0 auto;
-	width: 1410px;
-}
-#header div a.logo {
-	background: url('/assets/images/TitleBar.jpg') no-repeat left top;
-	display: block;
-	height: 250px;
-	text-indent: -99999px;
-}
-#header div ul {
-        background: #fbf804;
-	list-style: none;
-	margin: 0 0;
-	overflow: hidden;
-	padding: 0;
-}
-#header div ul li {
-        background: #fbf804;
-	float: left;
-	margin: 0 auto;
-	position: relative;
-	width: 300px;
-        overflow: hidden;
-}
-#header div ul li.current a,
-#header div ul li.current a:hover,
-#header div ul li a:hover {
-	background: url('/assets/images/menu-selected.png') no-repeat right center;
-	color: #424141;
-}
-#header div ul li a:hover {
-	background: none;
-}
-#header div ul li a {
-	background: none;
-	color: #FFFFFF;
-	display: inline-block;
-	font-size: 28px;
-	height: 54px;
-	line-height: 54px;
-        font-weight: 200;
-	padding: 0;
-	text-decoration: none;
-	text-transform: uppercase;
-        overflow: hidden;
-}
-#header div ul li a.Home {
-	padding: 0 28px 20px 50px;
-}
-#header div ul li a.About {
-	padding: 0 28px 0 00px;
-}
-#header div ul li a.Blog {
-	padding: 0 28px 0 0px;
-}
-#header div ul li a.Services {
-	padding: 0 28px 0 0px;
-}
-#header div ul li a.Friends {
-        padding: 0 28px 0 0px;
-}
-#header div ul li a.Trends {
-        padding: 0 28px 0 0px;
+
+.btn-spaced{
+    margin: 0px 10px 10px 0px;
 }
 
+#container {
+    position: relative;
+    min-height: 100%;
+    background-image: url('http://halo.bungie.net/images/games/kdighekc/stills/odst_012209_01.jpg');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+#main {
+    overflow:auto;
+    margin: 0 auto;
+}
+
+#header {
+    position: relative;
+    margin: 0 auto;
+    background: #666;
+    width: 100%;
+    height:14em;
+    min-width: 91.0625em;
+}
+
+#header #login {
+    position:relative;
+    float:right;
+    border: #091255 solid 3px;
+    background-color: #5d68bf;
+    color: white;
+    width: 20%;
+    margin-right: 15%;
+    font-size: 1.125em;
+    font-family: QuestrialRegular;
+}
+
+#header a.logo {
+    min-height: 7.3125em;
+    background: url('/assets/images/title-logo.png') no-repeat left top;
+    background-size: 53.0625em 7.3125em;
+    display: block;
+    position: relative;
+    margin: 1% 0% 1% -5%;
+    float: left;
+    width: 58%;
+    text-indent: -99999px;
+}
+
+#header #gutter {
+    border: none;
+    background-color: #cccccc;
+    float: left;
+    margin: 0;
+    height: 100%;
+    border-right: 3px solid black;
+    width: 7%;
+}
+
+#header #nav {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: #091255;
+}
+
+#header #nav ul {
+    width: 70%;
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+}
+
+#header #nav ul li {
+    background: #091255;
+    float: left;
+    height: 54px;
+    padding: 0.25em 0 0.25em 0;
+    overflow: hidden;
+    font-size: 1.875em;
+    font-family: Consolas;
+    line-height: 54px;
+    text-transform: uppercase;
+}
+#header #nav ul li.current a,
+#header #nav ul li.current a:hover,
+#header #nav ul li a:hover {
+	background: url('/assets/images/menu-selected.png') no-repeat right center;
+	color: #aaa;
+}
+#header #nav ul li a:hover {
+	background: none;
+}
+#header #nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+#header .brace {
+   opacity:0;
+   font-size: 1.5em;
+   color:white;
+}
+
+#body
+{
+    padding-bottom: 100px;
+    width: 100%;
+    overflow: auto;
+}
 
 #body div#background {
-	background: #048afb;
 	min-height: 380px;
 	padding: 0;
-	width: auto;
 }
 #body div#background div {
 	margin: 0 0;
 	overflow: hidden;
 	padding: 0px 0 0px;
-	width: 1410px;
 }
 
 #body div#background div div {
@@ -131,7 +176,7 @@ img {
 	text-align: justify;
 }
 
-#body #trends_XML{
+#body #section #trends_XML{
         color: #000;
         background-color: #fff;
         margin-right: auto;
@@ -139,7 +184,7 @@ img {
         font-family: Cambria, "Times New Roman", serif;
         font-size: 1.1em;
 }
-
+/*
 #body #trends_XML td.opening {
     border-bottom: 2px solid black;
     padding-top:20px;
@@ -158,7 +203,7 @@ img {
 
 #body #trends_XML td.cum_avg {
    padding: 20px 0px 0px 0px;
-}
+}*/
 
 #body pre {
         font-size: 80%;
@@ -213,29 +258,34 @@ p a:hover {
 	width: 320px;
 }
 #body div#section {
-	background: #17dc33;
+	background: #5d68bf;
 	padding: 0;
-	width: 100%;
+	width: 70%;
+        margin: 0 auto 0 auto;
+        min-width: 63.75em;
+        min-height: 20em;
+        box-shadow: -0.3125em 0 1.875em #444, 0.3125em 0 1.875em #444;
 }
-#body div ul {
-	list-style: none;
-	margin: 0 22px;
-	min-height: 400px;
-	padding: 0 0 42px;
-	width: 940px;
+
+#body div#section #post_content{
+    font-family:consolas, monospace;
 }
-#body div ul li {
-	display: block;
-	height: 180px;
-	overflow: hidden;
-	padding: 24px 0 0;
+
+#body div#section form#user-edit {
+    position:relative;
+    left: 70px;
 }
-#body div ul li:first-child {
-	padding: 66px 0 0;
+
+#body div#section h1.mtce-title{
+    position:relative;
+    left: 40px;
+    padding: 0 0 30px 0;
 }
-#body div#section ul li:first-child {
-	padding: 36px 0 0;
+
+#body div#section .editor:not(.tab){
+    width:70%;
 }
+
 #body div ul li a img {
 	border: none;
 	display: block;
@@ -247,29 +297,8 @@ p a:hover {
 	filter: alpha(opacity=90);/* Needed for IE8 and old versions */
 	opacity: 0.9;
 }
-#body div ul li div {
-	float: right;
-	padding: 0;
-	width: 592px;
-}
-#body div#section ul li div p {
-	color: #eeb58c;
-	line-height: 30px;
-	margin: 0;
-	padding: 0 0 0;
-	text-align: justify;
-}
-#body div ul li div p {
-	color: #000;
-	line-height: 30px;
-	margin: 0;
-	padding: 0 0 30px;
-	text-align: justify;
-}
-#body div ul li div p a {
-	color: #EEB58C;
-}
-#body div ul li div a.readmore {
+
+#body div a.readmore {
 	color: #585758;
 	display: inline-block;
 	font-size: 12px;
@@ -277,17 +306,13 @@ p a:hover {
 	line-height: 22px;
 	text-decoration: none;
 }
-#body div ul li div a.readmore:hover {
+#body div a.readmore:hover {
 	color: #b4b3b4;
 }
 #footer ul li a:hover {
 	color: #b6834f;
 }
-#body div {
-	margin: 0 auto;
-	padding: 40px 0 80px;
-	width: 940px;
-}
+
 #body div div.blog {
 	color: #585758;
 	font-size: 12px;
@@ -382,19 +407,19 @@ p a:hover {
 	display: inline;
 	padding: 0 5px;
 }
+
 #footer {
-	margin: 0 auto;
-	min-height: 85px;
-	overflow: hidden;
-	width: auto;
-        background: #fbf804;
+    position: relative;
+    margin: 0 auto 0 auto;
+    clear:both; 
+    min-height: 85px;
+    overflow: hidden;
+    width: auto;
+    height: 200px;
+    background: #091255;
+    padding: 0 10px 0 10px;
 }
-#footer div.logo {
-	float: left;
-	padding: 27px 0 0;
-	width: 220px;
-        
-}
+
 #footer div.logo a img {
 	display: block;
 }
@@ -402,14 +427,13 @@ p a:hover {
 	float: left;
 	list-style: none;
 	margin: 3px 0 0;
-	overflow: hidden;
+	overflow: auto;
 	padding: 33px 0 0;
-	width: 220px;
+	width: 400px;
 }
 #footer ul li {
-	border-left: 1px solid #FFFFFF;
 	float: left;
-	height: 10px; 
+	height: 25px;
 }
 #footer ul li:first-child {
 	border: 0;
@@ -418,8 +442,8 @@ p a:hover {
 	color: #85603a;
 	display: block;
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-	font-size: 10px;
-	line-height: 9px;
+	font-size: 18px;
+	line-height: 50%;
 	padding: 0 5px;
 	text-align: center;
 	text-decoration: none;
@@ -429,7 +453,7 @@ p a:hover {
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 	font-size: 10px;
 	float: left;
-	line-height: 16px;
+        line-height: 16px;
 	margin: 0;
 	padding: 33px 0 0;
 	width: 280px;

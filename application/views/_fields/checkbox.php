@@ -1,0 +1,1 @@
+<input type="checkbox" name="{name}"/> <label for="{name}">{label}</label>

@@ -8,20 +8,33 @@ class Trends extends Application {
         parent::__construct();
         $this->load->model('game_sales');
         $this->report = '';
+        $this->doc = new DOMDocument();
+        $this->doc->load(XML_FOLDER . 'trends.xml');
     }
     
     function index()
     {
         $this->report .= $this->_build_report_headings();
         $this->report .= $this->_build_report_body();
-        $this->load->helper('validation');
 
         $this->data['pagebody'] = "trendsView";
         $this->data['title'] = "Trends";
         $this->data['trends_xml'] = $this->report;
-        $this->data['results'] = validate_dtd(XML_FOLDER . 'game_sales.xml');
+        $this->data['trends_results'] = $this->doc->schemaValidate(XML_FOLDER . 'trends.xsd') ? 'Ok!' : 'Oops!';
         $this->render();
     }
+    
+    /**
+     * Renders the XML using the XSL stylesheet instead of the controller helper functions.
+     */
+    function xsl_version()
+    {
+        $this->data['pagebody'] = "trendsView";
+        $this->data['title'] = "Trends";
+        $this->data['trends_xml'] = xsl_transform(XML_FOLDER . 'trends.xml');
+        $this->data['trends_results'] = $this->doc->schemaValidate(XML_FOLDER . 'trends.xsd') ? 'Ok!' : 'Oops!';
+        $this->render();
+    }   
     
     /*
      * Builds a report from the data provided by the trends model.

@@ -1,0 +1,1 @@
+<input type="button" class="btn {css-extras}" value="{text}"/>

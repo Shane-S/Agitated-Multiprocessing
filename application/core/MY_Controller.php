@@ -40,6 +40,10 @@ class Application extends CI_Controller {
         $this->data['sidebar'] = $this->build_side_bar();
         $this->data['content'] = $this->parser->parse($this->data['pagebody'], $this->data, true);
 
+        $this->data['caboose_styles'] = $this->caboose->styles();
+        $this->data['caboose_scripts'] = $this->caboose->scripts();
+        $this->data['caboose_trailings'] = $this->caboose->trailings();
+        
         // finally, build the browser page!
         $this->data['data'] = &$this->data;
         $this->parser->parse('_template', $this->data);
@@ -60,13 +64,14 @@ class Application extends CI_Controller {
     function build_side_bar()
     {
         $result = '';
+        $current_role = $this->session->userdata('role');
 
         if ($this->session->userdata('username')) {
             // show user name etc
             $side_data = $this->session->all_userdata();
             $side_data['secret_menu'] = '';
-            if ($this->session->userdata('role') == 'admin')
-                $side_data['secret_menu'] = $this->parser->parse('_admin_menu', $side_data, true);
+                if ($current_role == 'admin')
+                    $side_data['secret_menu'] = $this->parser->parse('_admin_menu', $side_data, true);
             $result .= $this->parser->parse('_loggedin', $side_data, true);
         } else {
             // show the login form
@@ -83,8 +88,9 @@ class Application extends CI_Controller {
         else
         {
             $current_role = $this->session->userdata('role');
-            if ((is_array($required_access) && !in_array($current_role, $required_access))
-                    || $current_role != $required_access)
+
+            if (is_array($required_access) && !in_array($current_role, $required_access)
+                    || (!is_array($required_access) && $current_role != $required_access))
             {
                     redirect('/login');
                     return;

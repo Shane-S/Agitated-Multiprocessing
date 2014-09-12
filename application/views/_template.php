@@ -17,26 +17,34 @@ if (!defined('APPPATH'))
     <head>
         <meta charset="UTF-8">
         <title>{title}</title>
+        <link rel="stylesheet" type="text/css" href="/assets/css/kube.min.css" />
+        <script type="text/javascript" src="/assets/js/kube.buttons.js"></script>
+	<script type="text/javascript" src="/assets/js/jquery-1.7.min.js"></script>	
+	<script type="text/javascript" src="/assets/js/kube.datepicker.min.js"></script>
+        <script type="text/javascript" src="/assets/js/navbar.js"></script>
+        <script type="text/javascript" src="/assets/js/hoverIntent.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="/assets/css/kube.datepicker.css" /> 
+        <link rel="stylesheet" type="text/css" href="/assets/css/master.css">
+        <link rel="stylesheet" type="text/css" href="/assets/css/kube.min.css">
         <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+        {caboose_styles}
     </head>
     <body>
-        <div id="header">
-            {sidebar}
-            <div>
-                <a href="/" class="logo">PugSureWoi</a>
-                <ul>
+        <div id="container">
+            <div id="main">
+                <div id="header">
+                    {sidebar}
+                    <div id="gutter"></div>
+                    <a href="/" class="logo"></a>
                     {menubar}
-                </ul>
+                </div>
+                <div id="body">
+                    {content}
+                </div>
             </div>
-        </div>
-        <div id="body">
-            {content}
         </div>
         <div id="footer">
-            <div class="logo">
-                <a href="/"><img src="/assets/images/logo.jpg" alt="Logo"></a>
-            </div>
-            {menubar}
             <p>
                 &copy; Copyright &copy; 2023. Company name all rights reserved
             </p>
@@ -46,5 +54,7 @@ if (!defined('APPPATH'))
                 <a href="http://freewebsitetemplates.com/go/googleplus/" target="_blank" id="googleplus">Google&#43;</a>
             </div>
         </div>
+        {caboose_scripts}
+        {caboose_trailings}
     </body>
 </html>

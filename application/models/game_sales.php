@@ -7,7 +7,7 @@ class Game_Sales extends CI_Model
     function __construct()
     {
         parent::__construct();
-        $this->root = simplexml_load_file(XML_FOLDER . 'game_sales.xml');
+        $this->root = simplexml_load_file(XML_FOLDER . 'trends.xml');
         $this->sales_array = $this->_build_sales_array();
     }
     
@@ -28,10 +28,9 @@ class Game_Sales extends CI_Model
             foreach($sales_elem->platform as $platform)
             {
                 $percentages = array();
-                foreach($platform->percentage as $percentage)
-                {
-                    $percentages[(string)$percentage['genre']] = (string)$percentage;
-                }
+                foreach($platform->sale as $sale)
+                    $percentages[(string)$sale->genre] = $sale->percentage == 0 ? 'No data' : (string)$sale->percentage;
+
                 $sales[(string)$platform['type']] = $percentages;
             }
             $all_sales[(string)$sales_elem['year']] = $sales;
@@ -50,8 +49,8 @@ class Game_Sales extends CI_Model
     function get_headings()
     {
         $headings = array();
-        foreach($this->root->sales->platform->percentage as $percentage)
-            $headings[] = (string)$percentage['genre'];
+        foreach($this->root->sales->platform->sale as $sale)
+            $headings[] = (string)$sale->genre;
 
         return $headings;
     }

@@ -66,8 +66,9 @@ $db['default']['stricton'] = FALSE;
 
 $db['hosted'] = $db['default'];
 $db['hosted']['username'] = 'bcitx762_o03';
-$db['hosted']['password'] = 'localhostbcitx762_o03.L[wF;$#9rAwbcitx762_o03';
+$db['hosted']['password'] = '.L[wF;$#9rAw';
 $db['hosted']['database'] = 'bcitx762_o03';
 
+//var_dump($db[$active_group]);
 /* End of file database.php */
 /* Location: ./application/config/database.php */

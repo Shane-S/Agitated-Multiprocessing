@@ -33,6 +33,36 @@ function display_file($filename) {
     return $stuff;  // whew!
 }
 
+/**
+ * Perform an XSL transform on an XML document.
+ *
+ * @param string $filename  Name of the file whose contents you want to transform
+ * @param string $xslname Name of the XSL stylesheet to use, if not the bound one
+ * @return string   The HTML fragment resulting from the transformation.
+ */
+function xsl_transform($filename, $xslname = null) {
+    // Get the original XML document
+    $xml = new DOMDocument();
+    $xml->load($filename);
 
-
-
+    if ($xslname == null) {
+        // extract bound stylesheet from embedded link
+        $xp = new DOMXPath($xml);
+        // use xpath to get the directive
+        $pi = $xp->evaluate('/processing-instruction("xml-stylesheet")')->item(0);
+        // extract the "data" part of it
+        $data = $pi->data;
+        // find out where the href starts
+        $start = strpos($data, 'href=');
+        // and extract the stylesheet name
+        $xslname = XML_FOLDER . substr($data, $start + 6, -1);
+    }
+    // load the XSL stylesheet    
+    $xsl = new DOMDocument();
+    $xsl->load($xslname);
+    // prime the transform engine
+    $xslt = new XSLTProcessor();
+    $xslt->importStyleSheet($xsl);
+    // and away we go!
+    return $xslt->transformToXml($xml);
+}

@@ -8,4 +8,4 @@ class Media extends _Mymodel
         $this->setTable('media', 'uid');
     }
 }
-?>
+
